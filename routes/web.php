@@ -130,6 +130,21 @@ Route::middleware(['CekLogin:superadmin'])
             [ManajemenPeminjamanController::class, 'reject']
         )->name('peminjaman.reject');
 
+        /*
+        |------------------------------------------
+        | EXPORT PEMINJAMAN (PDF & EXCEL)
+        |------------------------------------------
+        */
+        Route::get(
+            '/peminjaman/export/pdf',
+            [ManajemenPeminjamanController::class, 'exportPdf']
+        )->name('peminjaman.export.pdf');
+
+        Route::get(
+            '/peminjaman/export/excel',
+            [ManajemenPeminjamanController::class, 'exportExcel']
+        )->name('peminjaman.export.excel');
+
 
         /*
         |------------------------------------------

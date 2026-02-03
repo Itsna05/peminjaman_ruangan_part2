@@ -1,54 +1,60 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const toggle = document.getElementById("filterToggle");
-    const dropdown = document.getElementById("filterDropdown");
-    const rows = document.querySelectorAll(".status-table tbody tr");
 
-    // buka tutup dropdown
-    toggle.addEventListener("click", function (e) {
-        e.stopPropagation();
-        dropdown.classList.toggle("show");
-    });
+    // =========================
+    // FILTER STATUS (LEGACY / OPTIONAL)
+    // =========================
 
-    // klik item filter
-    document.querySelectorAll(".filter-item").forEach((item) => {
-        item.addEventListener("click", function () {
-            const selectedStatus = this.dataset.value;
-            // contoh: "menunggu"
+    const filterToggle  = document.getElementById("filterToggle");
+    const filterDropdown = document.getElementById("filterDropdown");
 
-            rows.forEach((row) => {
-                const badge = row.querySelector(".badge-status");
+    // ❗ Jika elemen TIDAK ADA di halaman ini → STOP BAGIAN INI
+    if (filterToggle && filterDropdown) {
 
-                if (!badge) return;
+        const rows = document.querySelectorAll(".status-table tbody tr");
 
-                // cek apakah baris punya status yang dipilih
-                if (badge.classList.contains(selectedStatus)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-
-            dropdown.classList.remove("show");
+        filterToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            filterDropdown.classList.toggle("show");
         });
-    });
 
-    // klik di luar → dropdown nutup
-    document.addEventListener("click", function () {
-        dropdown.classList.remove("show");
-    });
-});
+        document.querySelectorAll(".filter-item").forEach((item) => {
+            item.addEventListener("click", function () {
+                const selectedStatus = this.dataset.value;
 
-document.addEventListener("DOMContentLoaded", function () {
-    const rowsSelect = document.getElementById("rowsSelect");
+                rows.forEach((row) => {
+                    const badge = row.querySelector(".badge-status");
+                    if (!badge) return;
+
+                    if (!selectedStatus || badge.classList.contains(selectedStatus)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+
+                filterDropdown.classList.remove("show");
+            });
+        });
+
+        document.addEventListener("click", function () {
+            filterDropdown.classList.remove("show");
+        });
+    }
+
+    // =========================
+    // JUMLAH BARIS (ROWS PER PAGE)
+    // =========================
+
+    const rowsSelect = document.getElementById("rowsPerPage");
     const tableBody = document.getElementById("tableBody");
 
-    // 🚨 JIKA ELEMEN TIDAK ADA → STOP SCRIPT INI
+    // ❗ Jika bukan halaman yang punya tabel → STOP
     if (!rowsSelect || !tableBody) return;
 
-    const rows = tableBody.querySelectorAll("tr");
+    const rows = Array.from(tableBody.querySelectorAll("tr"));
 
     function updateRows() {
-        const limit = parseInt(rowsSelect.value);
+        const limit = parseInt(rowsSelect.value, 10);
 
         rows.forEach((row, index) => {
             row.style.display = index < limit ? "" : "none";
@@ -57,4 +63,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateRows();
     rowsSelect.addEventListener("change", updateRows);
+
 });

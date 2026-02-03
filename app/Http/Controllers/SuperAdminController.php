@@ -7,15 +7,73 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\DB;
+use App\Models\Ruangan;
+use Carbon\Carbon;
+
 
 class SuperAdminController extends Controller
 {
     public function index()
     {
-        // HANYA ambil user role superadmin
         $admins = User::where('role', 'superadmin')->get();
-        return view('superadmin.dashboard', compact('admins'));
+
+        // =====================
+        // SUMMARY CARD
+        // =====================
+        $totalPeminjaman = Transaksi::count();
+
+        $menunggu = Transaksi::where('status_peminjaman', 'Menunggu')->count();
+        $disetujui = Transaksi::where('status_peminjaman', 'Disetujui')->count();
+        $dibatalkan = Transaksi::where('status_peminjaman', 'Dibatalkan')->count();
+
+        // =====================
+        // RUANGAN
+        // =====================
+        $totalRuangan = Ruangan::count();
+
+        // Ruangan tersedia HARI INI
+        $ruanganTersedia = Ruangan::whereNotIn('id_ruangan', function ($query) {
+            $query->select('id_ruangan')
+                ->from('transaksi')
+                ->whereDate('waktu_mulai', Carbon::today())
+                ->where('status_peminjaman', 'Disetujui');
+        })->count();
+
+        // =====================
+        // GRAFIK BULANAN
+        // =====================
+        $statistikBulanan = Transaksi::select(
+                DB::raw('MONTH(waktu_mulai) as bulan'),
+                DB::raw('COUNT(*) as total')
+            )
+            ->whereYear('waktu_mulai', now()->year)
+            ->groupBy(DB::raw('MONTH(waktu_mulai)'))
+            ->get();
+
+        // =====================
+        // RIWAYAT PEMINJAMAN (TABLE)
+        // =====================
+        $transaksi = Transaksi::with(['ruangan', 'bidang'])
+            ->orderBy('id_peminjaman', 'desc')
+            ->get();
+
+        return view(
+            'superadmin.dashboard',
+            compact(
+                'admins',
+                'totalPeminjaman',
+                'menunggu',
+                'disetujui',
+                'dibatalkan',
+                'totalRuangan',
+                'ruanganTersedia',
+                'statistikBulanan',
+                'transaksi'
+            )
+        );
     }
+
+
 
     public function manajemenuser()
     {

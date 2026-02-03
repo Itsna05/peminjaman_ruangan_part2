@@ -1,12 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ================= ACTIVE CARD =================
-    document.addEventListener("click", function (e) {
-        const card = e.target.closest(".detail-card");
-        if (!card) return;
 
-        // JANGAN aktif kalau klik tombol di dalam card
-        if (e.target.closest(".btn-lihat-detail")) return;
-        if (e.target.closest("#tambahToggle")) return;
+  // =====================================================
+  // EARLY EXIT → BUKAN HALAMAN RUANGAN
+  // =====================================================
+  if (!document.querySelector(".detail-card")) {
+    return;
+  }
+
+  // =====================================================
+  // HELPER
+  // =====================================================
+  const $ = (id) => document.getElementById(id);
+  const $$ = (sel) => document.querySelector(sel);
+  const $$$ = (sel) => document.querySelectorAll(sel);
+
+  // =====================================================
+  // ACTIVE CARD
+  // =====================================================
+  document.addEventListener("click", function (e) {
+    const card = e.target.closest(".detail-card");
+    if (!card) return;
+    if (
+      e.target.closest(".btn-lihat-detail") ||
+      e.target.closest("#tambahToggle")
+    ) return;
 
         document
             .querySelectorAll(".detail-card")
@@ -39,18 +56,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
             window._popupIndex = 0;
             window._currentCard = card;
+  // =====================================================
+  // GLOBAL CLICK HANDLER
+  // =====================================================
+  document.addEventListener("click", function (e) {
+
+    // ===== LIHAT DETAIL =====
+    if (e.target.closest(".btn-lihat-detail")) {
+      const card = e.target.closest(".detail-card");
+      if (!card) return;
+
+      const popup = $("popupDetail");
+      const popupImage = $("popupImage");
+      if (!popup || !popupImage) return;
+
+      window._currentCard = card;
+      window._popupImages = JSON.parse(card.dataset.images || "[]");
+      window._popupIndex = 0;
 
             const first = window._popupImages[0];
             const popupImage = document.getElementById("popupImage");
 
             popupImage.src = first.src;
             popupImage.style.objectPosition = `${first.posX}% ${first.posY}%`;
+      const first = window._popupImages[0];
+      if (first) {
+        popupImage.src = first.src || first;
+        popupImage.style.objectPosition =
+          `${first.posX || 50}% ${first.posY || 50}%`;
+      }
 
-            document.getElementById("popupNama").value = card.dataset.nama;
+            $("popupNama").value = card.dataset.nama || "";
 
-            renderTable(JSON.parse(card.dataset.elektronik), "popupElektronik");
+            renderTable(JSON.parse(card.dataset.elektronik || "[]"), "popupElektronik");
             renderTable(
-                JSON.parse(card.dataset.nonelektronik),
+                JSON.parse(card.dataset.nonelektronik || "[]"),
                 "popupNonElektronik",
             );
 
@@ -59,17 +99,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // ===== CLOSE POPUP =====
         if (e.target.id === "closepopup") {
+      const popup = $("popupDetail");
             if (
-                document.querySelector(".mode-edit").style.display === "block"
+                !popup) return;
+
+      if ($$(".mode-edit")?.style.display === "block"
             ) {
                 kembaliKeView();
             } else {
-                document.getElementById("popupDetail").style.display = "none";
+                popup.style.display = "none";
             }
         }
 
-        // ===== NEXT IMAGE =====
-        if (e.target.closest(".popup-nav.next")) {
+            if (e.target.closest(".popup-nav.next")) {
             window._popupIndex++;
             showImage();
         }
