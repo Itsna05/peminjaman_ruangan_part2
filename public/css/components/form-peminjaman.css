@@ -1,0 +1,497 @@
+/* =========================
+   FORM PEMINJAMAN RUANGAN
+========================= */
+
+.form-wrapper {
+    background: #eef3f8;
+    padding: 40px 48px;
+    border-radius: 18px;
+    margin-bottom: 40px;
+}
+
+.form-title {
+    font-weight: 700;
+    margin-bottom: 36px;
+}
+
+/* Input & select */
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid #d6d6d6;
+}
+
+.form-control::placeholder {
+    color: #a0a0a0;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #1e4fa1;
+    box-shadow: 0 0 0 0.15rem rgba(30, 79, 161, 0.15);
+}
+
+/* Textarea */
+.textarea-catatan {
+    resize: none;
+}
+
+/* Tombol */
+.btn-ajukan {
+    background: #ffd800;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 26px;
+    border-radius: 10px;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.btn-ajukan:hover {
+    background: #e6c000;
+    transform: translateY(-2px);
+}
+
+.waktu-wrapper {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.waktu-wrapper .form-control {
+    flex: 1 1 160px;
+    min-width: 140px;
+}
+
+.waktu-jam {
+    flex: 0 0 120px;
+}
+
+.separator {
+    font-weight: 600;
+}
+
+/* =========================
+   STATUS PEMINJAMAN
+========================= */
+
+.status-wrapper {
+    background: #eef3f8;
+    padding: 40px 20px;
+    border-radius: 16px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.status-title {
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.status-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Toolbar */
+.status-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 320px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 14px 10px 42px;
+    border-radius: 12px;
+    border: 1.5px solid #15468a;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #15468a;
+}
+
+/* filter aktif untuk dropdown */
+.filter-item.active {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 600;
+}
+
+/* ICON SEARCH */
+.search-box i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    cursor: pointer;
+    color: #15468a;
+    z-index: 2;
+}
+
+.search-box i:hover {
+    color: #15468a;
+}
+
+.search-btn {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #15468a;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-btn:hover {
+    color: #15468a;
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+    .status-toolbar {
+        flex-direction: column;
+    }
+
+    .search-box {
+        max-width: 100%;
+    }
+}
+
+/* filter */
+/* WRAPPER */
+.filter-box {
+    position: relative;
+}
+
+/* BUTTON FILTER */
+.filter-btn {
+    background: #fff;
+    border: 1.5px solid #0d47a1;
+    color: #000;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* ARROW */
+.filter-btn .arrow {
+    font-size: 14px;
+}
+
+/* DROPDOWN */
+.filter-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 180px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #15468a;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    padding: 8px;
+    z-index: 1000;
+}
+
+/* ITEM */
+.filter-item {
+    background: transparent;
+    border: none;
+    padding: 10px 12px;
+    text-align: left;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.filter-item:hover {
+    background: #e3f2fd;
+}
+
+/* AKTIF */
+.filter-dropdown.show {
+    display: flex;
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+    .filter-dropdown {
+        width: 100%;
+    }
+}
+
+/* TABLE */
+.status-table {
+    width: 100%;
+    min-width: 1300px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.status-table th,
+.status-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+/* SCROLL */
+.table-scroll-x {
+    overflow-x: auto;
+}
+
+/* Badge status */
+.badge-status {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.menunggu {
+    background: #ffe082;
+    color: #7a5d00;
+}
+
+.disetujui {
+    background: #4caf50;
+    color: #fff;
+}
+
+.ditolak {
+    background: #e53935;
+    color: #fff;
+}
+
+.dibatalkan {
+    background: #9e9e9e;
+    color: #fff;
+}
+/* =========================
+   BIDANG & SUB BIDANG
+========================= */
+
+.bidang-nama {
+    color: #000;
+}
+
+.sub-bidang {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.2;
+}
+
+/* =========================
+   WAKTU PEMINJAMAN
+========================= */
+
+.tanggal {
+    color: #000;
+}
+
+.jam {
+    font-size: 13px;
+    color: #777;
+}
+
+/* Button aksi */
+.btn-aksi {
+    background: #1e4fa1;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-aksi.disabled {
+    background-color: #cfcfcf;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Footer */
+.status-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.pagination button {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.pagination .active {
+    background: #1e4fa1;
+    color: #fff;
+}
+
+/* =========================
+   MODAL EDIT PEMINJAMAN
+========================= */
+
+/* =========================
+   MODAL EDIT PEMINJAMAN
+========================= */
+
+/* CONTAINER MODAL */
+.modal-custom {
+    background: #eef3f8;
+    border-radius: 18px;
+    padding: 0;
+    overflow: hidden; /* penting */
+}
+
+/* HEADER */
+.modal-header {
+    background: #174a8b;
+    color: #fff;
+    border-bottom: none;
+    position: relative;
+    padding: 14px 20px;
+}
+
+/* JUDUL */
+.modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* TOMBOL CLOSE */
+.btn-close-custom {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1 !important;
+    filter: none !important;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.btn-close-custom::before {
+    content: "✕";
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.btn-close-custom:hover::before {
+    color: #ffd54f;
+}
+
+/* BODY → INI KUNCI UTAMA */
+.modal-body {
+    padding: 20px 30px;
+    max-height: 70vh; /* 🔥 BIAR TIDAK KEPOTONG */
+    overflow-y: auto; /* 🔥 SCROLL MUNCUL */
+}
+
+/* FOOTER */
+.modal-footer {
+    border-top: none;
+    padding: 15px 20px;
+    background: #eef3f8;
+}
+
+/* BUTTON */
+.modal-footer button {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 8px 20px;
+}
+
+/* INPUT & SELECT */
+.modal-body .form-control,
+.modal-body .form-select {
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+}
+
+/* LABEL */
+.modal-body .form-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* WAKTU WRAPPER */
+.waktu-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.waktu-wrapper .separator {
+    font-weight: 600;
+    margin: 0 5px;
+}
+
+/* SCROLL BAR (OPSIONAL, BIAR HALUS) */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #c2d1e0;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* =========================
+   FIX MODAL EDIT PEMINJAMAN
+========================= */
+
+#modalEditPeminjaman .modal-dialog {
+    max-height: 90vh;
+}
+
+#modalEditPeminjaman .modal-content {
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#modalEditPeminjaman .modal-body {
+    overflow-y: auto;
+}
+
+/* VIEW MODE (READONLY VISUAL) */
+/* VIEW MODE - TAMPIL DATA TANPA BISA EDIT */
+.readonly-view {
+    pointer-events: none;
+    background-color: #e9ecef;
+    color: #495057;
+}

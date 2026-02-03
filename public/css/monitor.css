@@ -1,0 +1,258 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.monitor-body {
+    background: 
+        url('../img/bg-monitor.png') center center / cover no-repeat;
+    
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* HEADER */
+.monitor-header {
+    min-height: 100px;
+    max-height: 250px;
+    background: #15468A;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.header-center h4 {
+    font-weight: 700;
+}
+
+.header-right {
+    text-align: right;
+}
+
+/* LAYOUT UTAMA */
+.monitor-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 24px;
+}
+
+/* CARD */
+.monitor-card-harian {
+    background: #eef3f9;
+    border-radius: 24px;
+    max-height: 330px;
+    max-width: 2500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.monitor-card-mendatang {
+    background: #eef3f9;
+    border-radius: 24px;
+    max-height: 330px;
+    max-width: 2500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* TITLE */
+.section-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* TODAY SLIDER */
+.today-slider {
+    display: flex;
+    gap: 16px;
+    animation: slide-left 40s linear infinite;
+}
+
+.today-card {
+    max-width: 250px;
+    min-width: 300px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+
+@keyframes slide-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+
+/* BADGE */
+.badge-status.red {
+    background: #ff5b5b;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* TABLE AREA */
+.table-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.table-scroll {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+/* HEADER TABEL */
+.monitor-table-head {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.monitor-table-head th {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 3px solid #15468A;
+}
+
+/* WRAPPER BODY (SCROLL AREA) */
+.table-body-wrapper {
+    height: 200px;              /* ATUR TINGGI SCROLL */
+    overflow: hidden;
+    position: relative;
+}
+
+/* BODY TABLE */
+.table-body-wrapper .monitor-table {
+    width: 100%;
+    animation: scroll-up 18s linear infinite;
+}
+
+/* ROW */
+.monitor-table td {
+    padding: 14px 12px;
+    border-bottom: 2px solid #c9d8ef;
+}
+
+/* ANIMASI SCROLL */
+@keyframes scroll-up {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-50%);
+    }
+}
+
+
+/* =========================
+   GALLERY CONTAINER
+========================= */
+.monitor-gallery {
+    margin-top: 5px;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+.gallery-title {
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* =========================
+   SLIDER
+========================= */
+.gallery-slider {
+    position: relative;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* SETIAP SLIDE */
+.slide {
+    position: absolute;
+    transition: all 0.8s ease;
+    opacity: 0;
+    transform: scale(0.7);
+    filter: blur(3px);
+}
+
+/* GAMBAR */
+.slide img {
+    width: clamp(260px, 28vw, 520px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+}
+
+/* TENGAH (AKTIF) */
+.slide.active {
+    opacity: 1;
+    transform: scale(0.9);
+    filter: blur(0);
+    z-index: 1;
+    margin: 10px 60px;
+}
+
+/* KIRI */
+.slide.prev {
+    opacity: .6;
+    transform: translateX(-420px) scale(.75);
+    z-index: 2;
+}
+
+/* KANAN */
+.slide.next {
+    opacity: .6;
+    transform: translateX(420px) scale(.75);
+    z-index: 2;
+}
+
+/* =========================
+   INDICATOR (3 DOT SAJA)
+========================= */
+.gallery-indicator {
+    margin-top: 16px;
+}
+
+.gallery-indicator .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,.4);
+    border-radius: 50%;
+    margin: 0 6px;
+}
+
+.gallery-indicator .dot.active {
+    width: 26px;
+    border-radius: 10px;
+    background: #fff;
+}

@@ -1,0 +1,319 @@
+
+/* =========================
+   NAVBAR PETUGAS
+   ========================= */
+
+.navbar-petugas {
+    background-color: #15468A; 
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+/* Brand text */
+.navbar-petugas .navbar-brand small {
+    font-size: 0.75rem;
+}
+
+/* Menu underline */
+.navbar-petugas .nav-underline .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+    padding-bottom: 6px;
+}
+
+.navbar-petugas .nav-underline .nav-link.active {
+    border-bottom: 2px solid #FFD800;
+}
+
+/* Hover menu */
+.navbar-petugas .nav-underline .nav-link:hover {
+    opacity: 0.85;
+}
+
+/* Logout button */
+.navbar-petugas .btn-logout {
+    width: 42px;
+    height: 42px;
+    color: #ffffff;
+    padding: 0;
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background: transparent;
+}
+
+
+.navbar-petugas .btn-logout:hover {
+    background-color: #ffffff;
+    color: #15468A;
+}
+
+/* =========================
+   NAVBAR RESPONSIVE
+   ========================= */
+
+.navbar-menu-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Mobile */
+@media (max-width: 991.98px) {
+    .navbar-menu-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 20px;
+        gap: 24px;
+    }
+
+    .navbar-menu-wrapper .nav{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+    }
+
+    .navbar-menu-wrapper .nav .nav-link{
+        width: 100%;
+        text-align: left;
+        padding: 12px 0;
+        font-size: 16px;
+    }
+
+    .navbar-petugas .btn-logout {
+        margin-left: 0;
+        align-self: flex-start;
+    }
+}
+
+/* =========================
+   OFFCANVAS PETUGAS - FINAL FIX
+   ========================= */
+
+.offcanvas.navbar-petugas {
+    background-color: #15468A;
+}
+
+/* HEADER */
+.offcanvas.navbar-petugas .offcanvas-header,
+.offcanvas.navbar-petugas .offcanvas-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.offcanvas.navbar-petugas .offcanvas-title {
+    margin: 0 !important;
+}
+
+.offcanvas.navbar-petugas .btn-close {
+    margin-right: auto !important;
+    padding-left: 16px !important;
+}
+
+/* NAV LIST */
+.offcanvas.navbar-petugas .nav {
+    padding-left: 16px !important;
+}
+
+/* LINK */
+.offcanvas.navbar-petugas .nav-link {
+    display: inline-block !important;
+    width: fit-content !important;
+    padding-left: 0 !important;
+}
+
+/* UNDERLINE */
+.offcanvas.navbar-petugas .nav-link.active {
+    border-bottom: 2px solid #FFD800;
+}
+
+/* LOGOUT */
+.offcanvas.navbar-petugas .btn-link {
+    color: #ffffff;
+    padding-left: 0 !important;
+    text-decoration: none;
+}
+
+
+
+/* =========================
+   FOOTER DINAS
+   ========================= */
+
+.footer-dinas {
+    background-color: #15468A; /* sama dengan navbar */
+    font-size: 0.9rem;
+}
+
+/* Link footer */
+.footer-link a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+/* Sosial media icon */
+.footer-social a {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.footer-social a:hover {
+    opacity: 0.8;
+}
+
+/* WA Button */
+.footer-dinas .btn-warning {
+    font-weight: 500;
+}
+
+/* =========================
+   FOOTER LOGO
+   ========================= */
+
+.footer-logo {
+    max-width: 235px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .footer-logo {
+        max-width: 110px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .footer-logo {
+        max-width: 90px;
+    }
+}
+
+
+/* =========================
+   NAVBAR SUPER ADMIN
+   ========================= */
+
+.navbar-superadmin {
+    background-color: #154889; /* atau warna beda */
+    min-height: 70px;
+}
+
+/* nav underline hanya untuk superadmin */
+.navbar-superadmin .nav-underline {
+    --bs-nav-underline-border-color: #ffffff;
+    --bs-nav-underline-link-active-color: #ffffff;
+    --bs-nav-underline-border-width: 2px;
+}
+
+.navbar-superadmin .nav-underline .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* logout button */
+.navbar-superadmin .btn-logout {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+/* =========================
+   KONTAK PAGE STYLING
+   ========================= */
+
+/* background halaman kontak */
+.dashboard-content {
+    background: #f1f6fb; /* biru muda lembut */
+    padding: 30px 0;
+}
+
+/* CARD UMUM */
+.contact-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid #e6eaf0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* JUDUL DI DALAM CARD */
+.contact-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* MAPS */
+.contact-card iframe {
+    border-radius: 12px;
+}
+
+/* INFO KONTAK (KANAN) */
+.contact-info {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.contact-info strong {
+    font-size: 14px;
+}
+
+.contact-info p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ICON */
+.icon {
+    font-size: 18px;
+    color: #f43f5e; /* merah lembut */
+}
+
+/* FAQ */
+.faq-item {
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.faq-item:hover {
+    background: #f9fbfd;
+}
+
+.faq-item summary {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.faq-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}
