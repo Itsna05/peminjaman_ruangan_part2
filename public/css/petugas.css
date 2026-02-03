@@ -479,6 +479,58 @@ body {
     padding-inline: calc(50% - 160px)
 }
 
+.more-events {
+    display: none;
+}
+
+.event-info-card.open .more-events {
+    display: block;
+}
+
+.more-toggle {
+    cursor: pointer;
+    color: #909090;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+/*prev-next popup kalender*/
+.modal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.nav-btn {
+    background: #1f6feb;
+    border: none;
+    color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+}
+
+.nav-btn:hover {
+    background: #155ac4;
+}
+
+.nav-btn:disabled {
+    background: #bfc5cc;
+    cursor: not-allowed;
+}
+
+.nav-count {
+    font-weight: 600;
+    font-size: 15px;
+}
+
 /* =================================
    HEADER KONTAK - BIRU LEBIH TUA
    ================================= */

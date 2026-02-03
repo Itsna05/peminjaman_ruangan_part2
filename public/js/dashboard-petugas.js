@@ -11,42 +11,68 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document.querySelectorAll(".event-clickable").forEach((item) => {
-        item.addEventListener("click", function () {
-            const id = this.dataset.id;
+    let eventsOfDay = [];
+    let currentIndex = 0;
 
-            fetch(`/petugas/peminjaman/${id}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    document.getElementById("modalDetailContent").innerHTML = `
-                        <p><b>Nama Acara</b><br>${data.acara}</p>
+    document.body.addEventListener('click', function (e) {
+        const box = e.target.closest('.event-clickable');
+        if (!box) return;
 
-                        <p><b>Waktu</b><br>
-                            ${data.waktu_mulai} - ${data.waktu_selesai}
-                        </p>
+        const clickedDate = box.dataset.date;
 
-                        <p><b>Ruangan</b><br>${data.ruangan}</p>
+        eventsOfDay = [...document.querySelectorAll(`.event-clickable[data-date="${clickedDate}"]`)]
+            .map(el => el.dataset.id);
 
-                        <p><b>Jumlah Peserta</b><br>
-                            ${data.jumlah_peserta} orang
-                        </p>
+        currentIndex = eventsOfDay.indexOf(box.dataset.id);
 
-                        <p><b>Bidang</b><br>
-                            ${data.bidang}
-                        </p>
-
-                        <p><b>Sub Bidang</b><br>
-                            ${data.sub_bidang}
-                        </p>
-
-                        <p><b>No WhatsApp</b><br>${data.no_wa}</p>
-
-                        <p><b>Catatan</b><br>${data.catatan?.trim() ? data.catatan : "-"}</p>
-
-                    `;
-
-                    modal.show();
-                });
-        });
+        loadEvent(currentIndex);
+        modal.show();
     });
+
+    let eventCache = {};
+    function loadEvent(index) {
+         const id = eventsOfDay[index];
+
+    if(eventCache[id]){
+        renderModal(eventCache[id], index);
+        return;
+    }
+
+    fetch(`/petugas/peminjaman/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            eventCache[id] = data;
+            renderModal(data, index);
+        });
+    }
+        function renderModal(data, index) {
+            document.getElementById('modalDetailContent').innerHTML = `
+        <div class="modal-nav">
+            <button class="nav-btn" onclick="prevEvent()" ${index === 0 ? 'disabled' : ''}>‹</button>
+            <span class="nav-count">${index + 1} / ${eventsOfDay.length}</span>
+            <button class="nav-btn" onclick="nextEvent()" ${index === eventsOfDay.length - 1 ? 'disabled' : ''}>›</button>
+        </div>
+        <p><strong>Nama Acara</strong><br>${data.acara}</p>
+        <p><strong>Jumlah Peserta</strong><br>${data.jumlah_peserta} orang</p>
+        <p><strong>Waktu</strong><br>${data.waktu_mulai} - ${data.waktu_selesai}</p>
+        <p><strong>Bidang</strong><br>${data.bidang}</p>
+        <p><strong>Sub Bidang</strong><br>${data.sub_bidang}</p>
+        <p><strong>Ruangan</strong><br>${data.ruangan}</p>
+        <p><strong>Catatan</strong><br>${data.catatan}</p>
+    `;
+        }
+
+    window.nextEvent = function () {
+        if (currentIndex < eventsOfDay.length - 1) {
+            currentIndex++;
+            loadEvent(currentIndex);
+        }
+    }
+
+    window.prevEvent = function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            loadEvent(currentIndex);
+        }
+    }
 });

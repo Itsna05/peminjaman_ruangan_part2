@@ -135,7 +135,8 @@
 
                                 @foreach ($eventsOnDate as $event)
                                     <div class="event event-clickable"
-                                        data-id="{{ $event->id_peminjaman }}">
+                                        data-id="{{ $event->id_peminjaman }}"
+                                        data-date="{{ $date->toDateString() }}">
                                         <small>
                                             {{ $event->acara }}<br>
                                             {{ $event->waktu_mulai->format('H:i') }} -
@@ -155,9 +156,14 @@
             ======================= --}}
             <div class="col-lg-4">
                 <div class="event-info-card">
-                    <h6 class="event-info-title">Data kegiatan berlangsung hari ini</h6>
+                    <h6 class="event-info-title">
+                        Data kegiatan berlangsung hari ini ({{ $eventsToday->count() }})
+                    </h6>
 
-                    @forelse ($eventsToday as $event)
+                    @forelse ($eventsToday as $index => $event)
+
+                    {{-- EVENT PERTAMA SELALU MUNCUL --}}
+                    @if ($index == 0)
                         <div class="event-info-item">
                             <strong>Nama Acara</strong>
                             <p>{{ $event->acara }}</p>
@@ -194,10 +200,59 @@
                             <p>{{ $event->catatan ?? '-' }}</p>
                         </div>
 
+                        {{-- TOMBOL DROPDOWN --}}
+                        @if ($eventsToday->count() > 1)
+                            <div class="more-toggle" onclick="toggleMore(this)">
+                                ▼ Lihat {{ $eventsToday->count() - 1 }} kegiatan lainnya
+                            </div>
+                        @endif
+
                         <hr>
-                    @empty
-                        <p class="text-muted">Tidak ada kegiatan hari ini</p>
-                    @endforelse
+                    @else
+                        {{-- EVENT LAIN DISIMPAN DALAM WRAPPER HIDDEN --}}
+                        <div class="more-events">
+                            <div class="event-info-item">
+                                <strong>Nama Acara</strong>
+                                <p>{{ $event->acara }}</p>
+                            </div>
+
+                            <div class="event-info-item">
+                                <strong>Jumlah Peserta</strong>
+                                <p>{{ $event->jumlah_peserta }} orang</p>
+                            </div>
+
+                            <div class="event-info-item">
+                                <strong>Waktu</strong>
+                                <p>{{ $event->waktu_mulai->format('H:i') }} -
+                                {{ $event->waktu_selesai->format('H:i') }}</p>
+                            </div>
+
+                            <div class="event-info-item">
+                                <strong>Bidang</strong>
+                                <p>{{ $event->bidang->bidang ?? '-' }}</p>
+                            </div>
+
+                            <div class="event-info-item">
+                                <strong>Sub Bidang</strong>
+                                <p>{{ $event->bidang->sub_bidang ?? '-' }}</p>
+                            </div>
+
+                            <div class="event-info-item">
+                                <strong>Ruangan</strong>
+                                <p>{{ $event->ruangan->nama_ruangan ?? '-' }}</p>
+                            </div>
+
+                            <div class="event-info-item">
+                                <strong>Catatan</strong>
+                                <p>{{ $event->catatan ?? '-' }}</p>
+                            </div>
+                            <hr>
+                        </div>
+                    @endif
+
+                @empty
+                    <p class="text-muted">Tidak ada kegiatan hari ini</p>
+                @endforelse
                 </div>
             </div>
 
@@ -205,22 +260,15 @@
     </div>
 </section>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+function toggleMore(el) {
+    const card = el.closest('.event-info-card');
+    card.classList.toggle('open');
 
-    document.querySelectorAll('.event-clickable').forEach(item => {
-        item.addEventListener('click', function () {
-
-            const modal = new bootstrap.Modal(
-                document.getElementById('modalDetailPeminjaman')
-            );
-
-            modal.show();
-        });
-    });
-
-});
+    el.innerHTML = card.classList.contains('open')
+        ? '▲ Sembunyikan'
+        : '▼ Lihat lainnya';
+}
 </script>
-
 @include('petugas.partials.modal-detail-peminjaman')
 
 @endsection
