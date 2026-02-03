@@ -67,211 +67,83 @@
         </div>
 
         <div class="ruangan-slider">
-            <div class="ruangan-track">
+    <div class="ruangan-track">
 
-            {{-- ================= CARD 1 ================= --}}
-            @php
-            $elektronik = [
-                ['nama' => 'AC', 'jumlah' => 2],
-                ['nama' => 'Sound System', 'jumlah' => 1],
-                ['nama' => 'Layar LED', 'jumlah' => 0],
-                ['nama' => 'Alat Musik', 'jumlah' => 1],
-            ];
+        @foreach($ruangans as $ruangan)
+        @php
+            $elektronik = $ruangan->sarana
+                ->where('jenis_sarana','elektronik')
+                ->map(fn($s) => [
+                    'nama' => $s->nama_sarana,
+                    'jumlah' => $s->jumlah
+                ])->values();
 
-            $nonelektronik = [
-                ['nama' => 'Kursi', 'jumlah' => 10],
-                ['nama' => 'Meja', 'jumlah' => 5],
-            ];
+            $nonelektronik = $ruangan->sarana
+                ->where('jenis_sarana','non-elektronik')
+                ->map(fn($s) => [
+                    'nama' => $s->nama_sarana,
+                    'jumlah' => $s->jumlah
+                ])->values();
 
-            $images = [
-                asset('img/ruang_SKPD_TP1.png'),
-                asset('img/ruang_SKPD_TP2.png'),
-                asset('img/ruang_SKPD_TP3.png'),
-                asset('img/ruang_SKPD_TP4.png'),
-            ];
-            @endphp
+            $images = $ruangan->gambar
+            ->map(fn($g) => asset('img/ruangan/'.$g->nama_file))
+            ->values();
 
-            <div class="detail-card search-item"
-                data-nama="Ruang SKPD TP"
-                data-elektronik='@json($elektronik)'
-                data-nonelektronik='@json($nonelektronik)'
-                data-images='@json($images)'>
+            $carouselId = 'foto-ruangan-'.$ruangan->id_ruangan;
+        @endphp
 
-                <div class="detail-card-header">Ruang SKPD TP</div>
-
-                <div class="detail-card-image photo-frame">
-                    <div id="foto-skpd-timur"
-                         class="carousel slide foto-carousel"
-                         data-bs-touch="false"
-                         data-bs-interval="false">
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{ asset('img/ruang_SKPD_TP1.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP2.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP3.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP4.png') }}">
-                            </div>
-                        </div>
-
-                        <button class="carousel-control-prev"
-                                type="button"
-                                data-bs-target="#foto-skpd-timur"
-                                data-bs-slide="prev"></button>
-
-                        <button class="carousel-control-next"
-                                type="button"
-                                data-bs-target="#foto-skpd-timur"
-                                data-bs-slide="next"></button>
-                    </div>
-                    <button class="btn-lihat-detail">
-                        Lihat Detail
-                    </button>
-                </div>
-            </div>
-
-            {{-- ================= CARD 2 ================= --}}
-           @php
-            $elektronik = [
-                ['nama' => 'AC', 'jumlah' => 10],
-                ['nama' => 'Sound System', 'jumlah' => 5],
-                ['nama' => 'Layar LED', 'jumlah' => 1],
-                ['nama' => 'Alat Musik', 'jumlah' => 4],
-            ];
-
-            $nonelektronik = [
-                ['nama' => 'Kursi', 'jumlah' => 30],
-                ['nama' => 'Meja', 'jumlah' => 10],
-            ];
-
-            $images = [
-                asset('img/ruang_SKPD_TP3.png'),
-                asset('img/ruang_SKPD_TP2.png'),
-                asset('img/ruang_SKPD_TP1.png'),
-                asset('img/ruang_SKPD_TP4.png'),
-            ];
-            @endphp
-
-            <div class="detail-card search-item"
-            data-nama="Ruang Rapat A"
+        <div class="detail-card search-item"
+            data-id="{{ $ruangan->id_ruangan }}"
+            data-nama="{{ $ruangan->nama_ruangan }}"
             data-elektronik='@json($elektronik)'
             data-nonelektronik='@json($nonelektronik)'
             data-images='@json($images)'>
 
-                <div class="detail-card-header">Ruang Rapat A</div>
 
-                <div class="detail-card-image photo-frame">
-                    <div id="foto-rapat-a"
-                         class="carousel slide foto-carousel"
-                         data-bs-touch="false"
-                         data-bs-interval="false">
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{ asset('img/ruang_SKPD_TP3.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP2.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP1.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP4.png') }}">
-                            </div>
-                        </div>
-
-                        <button class="carousel-control-prev"
-                                type="button"
-                                data-bs-target="#foto-rapat-a"
-                                data-bs-slide="prev"></button>
-
-                        <button class="carousel-control-next"
-                                type="button"
-                                data-bs-target="#foto-rapat-a"
-                                data-bs-slide="next"></button>
-                    </div>
-                    <button class="btn-lihat-detail">
-                        Lihat Detail
-                    </button>
-                </div>
+            <div class="detail-card-header">
+                {{ $ruangan->nama_ruangan }}
             </div>
 
-            {{-- ================= CARD 3 ================= --}}
-            @php
-            $elektronik = [
-                ['nama' => 'AC', 'jumlah' => 3],
-                ['nama' => 'Sound System', 'jumlah' => 2],
-                ['nama' => 'Layar LED', 'jumlah' => 1],
-                ['nama' => 'Alat Musik', 'jumlah' => 0],
-            ];
+            <div class="detail-card-image photo-frame">
+                <div id="{{ $carouselId }}"
+                     class="carousel slide foto-carousel"
+                     data-bs-touch="false"
+                     data-bs-interval="false">
 
-            $nonelektronik = [
-                ['nama' => 'Kursi', 'jumlah' => 30],
-                ['nama' => 'Meja', 'jumlah' => 10],
-            ];
-
-            $images = [
-                asset('img/ruang_SKPD_TP4.png'),
-                asset('img/ruang_SKPD_TP3.png'),
-                asset('img/ruang_SKPD_TP2.png'),
-                asset('img/ruang_SKPD_TP1.png'),
-            ];
-            @endphp
-
-            <div class="detail-card search-item"
-            data-nama="Aula Utama"
-            data-elektronik='@json($elektronik)'
-            data-nonelektronik='@json($nonelektronik)'
-            data-images='@json($images)'>
-
-                <div class="detail-card-header">Aula Utama</div>
-                
-                <div class="detail-card-image photo-frame">
-                    <div id="foto-aula-utama"
-                         class="carousel slide foto-carousel"
-                         data-bs-touch="false"
-                         data-bs-interval="false">
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{ asset('img/ruang_SKPD_TP4.png') }}">
+                     <div class="carousel-inner">
+                        @if($images->count())
+                            @foreach($images as $i => $img)
+                                <div class="carousel-item {{ $i==0 ? 'active' : '' }}">
+                                    <img src="{{ $img }}">
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="empty-photo">
+                                <i class="bi bi-image"></i>
+                                <p>Belum ada foto</p>
                             </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP3.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP2.png') }}">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('img/ruang_SKPD_TP1.png') }}">
-                            </div>
-                        </div>
-
-                        <button class="carousel-control-prev"
-                                type="button"
-                                data-bs-target="#foto-aula-utama"
-                                data-bs-slide="prev"></button>
-
-                        <button class="carousel-control-next"
-                                type="button"
-                                data-bs-target="#foto-aula-utama"
-                                data-bs-slide="next"></button>
+                        @endif
                     </div>
-                    <button class="btn-lihat-detail">
-                        Lihat Detail
-                    </button>
+                    <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#{{ $carouselId }}"
+                            data-bs-slide="prev"></button>
+
+                    <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#{{ $carouselId }}"
+                            data-bs-slide="next"></button>
                 </div>
-            </div>
-            
+
+                <button class="btn-lihat-detail">
+                    Lihat Detail
+                </button>
             </div>
         </div>
+        @endforeach
+
+    </div>
+</div>
     </div>
 </section>
 

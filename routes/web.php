@@ -147,10 +147,6 @@ Route::middleware(['CekLogin:superadmin'])
         Route::get('/manajemen-user', [SuperAdminController::class, 'manajemenuser'])
             ->name('manajemenuser');
 
-        Route::get('/manajemen-ruangan', function () {
-            return view('superadmin.manajemen-ruangan');
-        })->name('manajemen-ruangan');
-
         Route::post('/bidang-pegawai/store',[SuperAdminController::class, 'storeBidang'])
             ->name('bidang.store');
 
@@ -159,6 +155,21 @@ Route::middleware(['CekLogin:superadmin'])
 
         Route::put('/user/update',[SuperAdminController::class, 'updateUser'])
         ->name('user.update');
+
+        Route::put(
+        '/manajemen-ruangan/{id}',
+        [ManajemenRuanganController::class, 'update']
+        )->name('manajemen-ruangan.update');
+
+        Route::post('/manajemen-ruangan', 
+            [ManajemenRuanganController::class, 'store']
+        )->name('manajemen-ruangan.store');
+
+        Route::delete(
+            '/manajemen-ruangan/{id}',
+            [ManajemenRuanganController::class, 'destroy']
+        );
+
 
     });
 
