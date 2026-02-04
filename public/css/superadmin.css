@@ -171,6 +171,7 @@ body {
     background: #ffffff;
     border-radius: 22px;
     padding: 26px 28px;
+    overflow: hidden;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
@@ -587,13 +588,6 @@ body {
    FIX DROPDOWN KECLIP TABLE
 ========================= */
 
-.search-item,
-.dash-slider,
-.status-card {
-    overflow: visible !important;
-}
-
-
 /* ================= TAB HEADER ================= */
 .approval-tabs {
     margin-top: -40px;
@@ -826,14 +820,55 @@ body {
    ========================= */
 
 /* Wrapper */
-.table-wrapper {
+.status-peminjaman-ruangan .status-table-wrap {
+    width: 100%;
+    min-width: 1300px;
+    table-layout: fixed;
+    padding-left: 28px;
+    padding-right: 28px;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+}
+.status-peminjaman-ruangan .table-responsive {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    position: relative;
+}
+
+
+.status-peminjaman-ruangan .search-item,
+.status-peminjaman-ruangan .dash-slider,
+.status-peminjaman-ruangan .status-card {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+}
+
+
+.status-peminjaman-ruangan 
+.approval-table th:nth-child(6),
+.status-peminjaman-ruangan 
+.approval-table td:nth-child(6) {
+    width: 60px;
+}
+
+.status-peminjaman-ruangan 
+.approval-table th:nth-child(7),
+.status-peminjaman-ruangan 
+.approval-table td:nth-child(7) {
+    width: 120px;
+}
+
+/* .table-wrapper {
     width: 100%;
     overflow-x: auto;
-}
+} */
 
 /* TABLE RESET & FIX */
 .approval-table {
     width: 100%;
+    min-width: 1300px;
     border-collapse: collapse;
     table-layout: fixed;
     background: #fff;

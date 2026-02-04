@@ -101,62 +101,66 @@
             </div>
 
             {{-- TABLE --}}
-            <div class="table-responsive search-item">
-                <table class="approval-table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Ruangan</th>
-                            <th>Sub Bidang</th>
-                            <th>Bidang</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
+            <div class="riwayat-wrapper status-peminjaman-ruangan">
+                <div class="status-card">
+                    <div class="status-table-wrap search-item">
+                        <table class="approval-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Ruangan</th>
+                                    <th>Sub Bidang</th>
+                                    <th>Bidang</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
 
-                    <tbody id="tableBody">
-                        @forelse ($transaksi as $t)
-                        <tr data-status="{{ strtolower($t->status_peminjaman) }}">
+                            <tbody id="tableBody">
+                                @forelse ($transaksi as $t)
+                                <tr data-status="{{ strtolower($t->status_peminjaman) }}">
 
-                            <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $loop->iteration }}</td>
 
-                            <td>{{ $t->ruangan->nama_ruangan ?? '-' }}</td>
-                            <td>{{ $t->bidang->sub_bidang ?? '-' }}</td>
-                            <td>{{ $t->bidang->bidang ?? '-' }}</td>
+                                    <td>{{ $t->ruangan->nama_ruangan ?? '-' }}</td>
+                                    <td>{{ $t->bidang->sub_bidang ?? '-' }}</td>
+                                    <td>{{ $t->bidang->bidang ?? '-' }}</td>
 
 
 
-                            <td class="text-center">
-                                <span class="badge-status {{ strtolower($t->status_peminjaman) }}">
-                                    {{ $t->status_peminjaman }}
-                                </span>
-                            </td>
+                                    <td class="text-center">
+                                        <span class="badge-status {{ strtolower($t->status_peminjaman) }}">
+                                            {{ $t->status_peminjaman }}
+                                        </span>
+                                    </td>
 
-                            <td class="text-center">
-                                @if ($t->status_peminjaman === 'Menunggu')
-                                    <button class="btn-edit btn-open-modal"
-                                            data-id="{{ $t->id_peminjaman }}">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                @else
-                                    <button class="btn-edit disabled" disabled>
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                @endif
-                            </td>
+                                    <td class="text-center">
+                                        @if ($t->status_peminjaman === 'Menunggu')
+                                            <button class="btn-edit btn-open-modal"
+                                                    data-id="{{ $t->id_peminjaman }}">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        @else
+                                            <button class="btn-edit disabled" disabled>
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        @endif
+                                    </td>
 
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center text-muted">
-                                Belum ada pengajuan peminjaman
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">
+                                        Belum ada pengajuan peminjaman
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
 
-                </table>
-                            
+                        </table>
+                                    
+                    </div>
+                </div>
             </div>
 
             {{-- FOOTER --}}    
