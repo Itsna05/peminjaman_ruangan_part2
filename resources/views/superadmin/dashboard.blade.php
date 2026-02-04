@@ -99,7 +99,7 @@
    RIWAYAT PEMINJAMAN RUANGAN
    ======================= --}}
 <section>
-    <div class="status-wrapper">
+    <div class="riwayat-wrapper">
 
         <h4 class="status-title text-center">
             Riwayat Peminjaman Ruangan

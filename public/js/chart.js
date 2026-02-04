@@ -1,33 +1,53 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const ctx = document.getElementById('loanChart');
+(function () {
+    let attempts = 0;
+    const maxAttempts = 50; // ~5 detik
 
-    if (!ctx) {
-        console.error('Canvas loanChart tidak ditemukan');
-        return;
-    }
+    const waitForChart = setInterval(() => {
+        attempts++;
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-            datasets: [
-                {
-                    label: 'Total Peminjaman',
-                    data: [3, 5, 2, 6, 4, 7, 9, 6, 5, 4, 2, 3],
-                    borderColor: '#15468A',
-                    backgroundColor: 'rgba(37,99,235,0.15)',
-                    tension: 0.4,
-                    fill: true
+        const canvas = document.getElementById('loanChart');
+
+        if (
+            typeof Chart !== 'undefined' &&
+            canvas &&
+            Array.isArray(window.dataBulanan)
+        ) {
+            clearInterval(waitForChart);
+
+            const ctx = canvas.getContext('2d');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [
+                        'Januari','Februari','Maret','April','Mei','Juni',
+                        'Juli','Agustus','September','Oktober','November','Desember'
+                    ],
+                    datasets: [{
+                        label: 'Total Peminjaman',
+                        data: window.dataBulanan,
+                        borderColor: '#15468A',
+                        backgroundColor: 'rgba(37,99,235,0.15)',
+                        tension: 0.4,
+                        fill: true,
+                        borderWidth: 3,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
                 }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true
-                }
-            }
+            });
+
+            console.log('Chart berhasil dirender');
         }
-    });
-});
+
+        if (attempts >= maxAttempts) {
+            clearInterval(waitForChart);
+            console.warn('Chart gagal dirender: dependensi tidak lengkap');
+        }
+    }, 100);
+})();
