@@ -8,6 +8,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\PeminjamanRuanganController;
 use App\Http\Controllers\ManajemenPeminjamanController;
 use App\Http\Controllers\ManajemenRuanganController;
+use App\Http\Controllers\ExportPeminjamanController;  
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
@@ -136,14 +137,14 @@ Route::middleware(['CekLogin:superadmin'])
         |------------------------------------------
         */
         Route::get(
-            '/peminjaman/export/pdf',
-            [ManajemenPeminjamanController::class, 'exportPdf']
-        )->name('peminjaman.export.pdf');
+            '/peminjaman/export/excel',
+            [ExportPeminjamanController::class, 'exportExcel']
+        )->name('peminjaman.export.excel');
 
         Route::get(
-            '/peminjaman/export/excel',
-            [ManajemenPeminjamanController::class, 'exportExcel']
-        )->name('peminjaman.export.excel');
+            '/peminjaman/export/pdf',
+            [ExportPeminjamanController::class, 'exportPdf']
+        )->name('peminjaman.export.pdf');
 
 
         /*

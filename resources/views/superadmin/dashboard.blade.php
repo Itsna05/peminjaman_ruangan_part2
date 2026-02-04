@@ -174,28 +174,9 @@
                                         id="timeFilterMenu"
                                         data-dropdown-menu
                                     >
-                                        <select id="timeFilterMonth" class="time-filter__input">
-                                            <option value="">Semua Bulan</option>
-                                            <option value="01">Januari</option>
-                                            <option value="02">Februari</option>
-                                            <option value="03">Maret</option>
-                                            <option value="04">April</option>
-                                            <option value="05">Mei</option>
-                                            <option value="06">Juni</option>
-                                            <option value="07">Juli</option>
-                                            <option value="08">Agustus</option>
-                                            <option value="09">September</option>
-                                            <option value="10">Oktober</option>
-                                            <option value="11">November</option>
-                                            <option value="12">Desember</option>
-                                        </select>
+                                        <input type="date" id="timeFilterFrom" class="time-filter__input">
+                                        <input type="date" id="timeFilterTo"   class="time-filter__input">
 
-                                        <select id="timeFilterYear" class="time-filter__input">
-                                            <option value="">Semua Tahun</option>
-                                            <option value="2024">2024</option>
-                                            <option value="2025">2025</option>
-                                            <option value="2026">2026</option>
-                                        </select>
 
                                         <button type="button" class="time-filter__clear" id="timeFilterClear">
                                             Tampilkan Semua
