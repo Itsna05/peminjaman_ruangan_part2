@@ -42,7 +42,7 @@
                 <input type="text" placeholder="Pencarian" id="searchBidang">
             </div>
 
-            <button class="btn btn-outline-primary user-btn-add"
+            <button class="tambah-btn" type="button" id="tambahToggle"
                 data-bs-toggle="modal"
                 data-bs-target="#modalTambahBidang">
                     Tambah
@@ -60,7 +60,7 @@
                             <th width="80">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         @forelse ($bidangPegawai as $index => $bidang)
                             <tr>
                                 <td class="text-center">{{ $index + 1 }}</td>
@@ -90,6 +90,19 @@
                     </tbody>
 
                 </table>
+            </div>
+            
+            <div class="status-footer">
+                <div class="rows-info">
+                    Jumlah Baris :
+                    <select id="rowsPerPage">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+
+                <div class="pagination" id="pagination"></div>
             </div>
 
         </div>
@@ -145,7 +158,7 @@
                     </div>
 
 
-                    <button class="btn btn-outline-primary"
+                    <button class="tambah-btn" type="button" id="tambahToggle"
                             data-bs-toggle="modal"
                             data-bs-target="#modalTambahUser">
                         Tambah
@@ -167,7 +180,7 @@
                                 <th width="80">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableBody">
                             @forelse ($users as $index => $user)
                                 <tr data-role="{{ $user->role }}">
                                     <td class="text-center">{{ $index + 1 }}</td>
@@ -202,6 +215,19 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="status-footer">
+                <div class="rows-info">
+                    Jumlah Baris :
+                    <select id="rowsPerPage">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+
+                <div class="pagination" id="pagination"></div>
+            </div>
             </div>
     </div>
 
@@ -419,5 +445,4 @@
 @push('scripts')
 <script src="{{ asset('js/user-search.js') }}"></script>
 @endpush
-
 @endsection
