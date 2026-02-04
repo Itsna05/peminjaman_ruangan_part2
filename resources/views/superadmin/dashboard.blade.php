@@ -105,7 +105,7 @@
             Riwayat Peminjaman Ruangan
         </h4>
 
-        <div class="status-card">
+        <div class="status-card rp-card">
 
             {{-- TOOLBAR --}}
             <div class="status-toolbar">
@@ -142,8 +142,8 @@
             </div>
 
             {{-- TABLE --}}
-            <div class="search-item dash-slider">
-                <table class="status-table">
+            <div class="search-item dash-slider rp-table-scroll">
+                <table class="status-table rp-table">
                         <colgroup>
                             <col style="width:45px">     <!-- No -->
                             <col style="width:140px">    <!-- Nama Ruangan -->

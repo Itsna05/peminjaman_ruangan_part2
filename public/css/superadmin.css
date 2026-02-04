@@ -172,6 +172,10 @@ body {
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
+.rp-card {
+    overflow: visible;
+}
+
 /* =========================
    TOOLBAR
 ========================= */
@@ -444,6 +448,12 @@ body {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
+}
+
+.rp-table {
+    min-width: 1600px;
+    table-layout: fixed;
+    background: #fff;
 }
 
 .status-table thead th {
@@ -1019,6 +1029,10 @@ body {
     background: rgba(255, 0, 0, 0.05);
 }
 
+.rp-table-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 .dash-slider::-webkit-scrollbar {
     height: 8px;
 }
