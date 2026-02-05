@@ -200,6 +200,11 @@
                             <p>{{ $event->catatan ?? '-' }}</p>
                         </div>
 
+                        <div class="event-info-item">
+                            <strong>Status</strong>
+                            <p>{{ $event->status_peminjaman ?? '-' }}</p>
+                        </div>
+
                         {{-- TOMBOL DROPDOWN --}}
                         @if ($eventsToday->count() > 1)
                             <div class="more-toggle" onclick="toggleMore(this)">
@@ -246,6 +251,11 @@
                                 <strong>Catatan</strong>
                                 <p>{{ $event->catatan ?? '-' }}</p>
                             </div>
+
+                            <div class="event-info-item">
+                            <strong>Status</strong>
+                            <p>{{ $event->status_peminjaman ?? '-' }}</p>
+                        </div>
                             <hr>
                         </div>
                     @endif

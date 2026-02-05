@@ -29,16 +29,20 @@ class DashboardController extends Controller
         $eventsMonth = Transaksi::with(['bidang', 'ruangan'])
             ->whereYear('waktu_mulai', $year)
             ->whereMonth('waktu_mulai', $month)
+            ->whereIn('status_peminjaman', ['menunggu', 'disetujui'])
             ->orderBy('waktu_mulai')
             ->get();
+
 
         // =============================
         // EVENT HARI INI (panel kanan)
         // =============================
         $eventsToday = Transaksi::with(['bidang', 'ruangan'])
             ->whereDate('waktu_mulai', Carbon::today())
+            ->whereIn('status_peminjaman', ['menunggu', 'disetujui'])
             ->orderBy('waktu_mulai')
             ->get();
+
 
         $eventsForJs = $eventsMonth->mapWithKeys(function ($e) {
             return [
@@ -51,6 +55,7 @@ class DashboardController extends Controller
                     'sub_bidang' => $e->bidang->sub_bidang ?? '-',
                     'ruangan' => $e->ruangan->nama_ruangan ?? '-',
                     'catatan' => $e->catatan ?? '-',
+                    'status' => $e->status_peminjaman ?? '-',
                 ]
             ];
         });
@@ -66,25 +71,43 @@ class DashboardController extends Controller
     public function detail($id)
     {
         $event = Transaksi::with(['bidang', 'ruangan'])
-            ->findOrFail($id);
+            ->where('id_peminjaman', $id)
+            ->whereIn('status_peminjaman', ['menunggu', 'disetujui'])
+            ->first();
+
+        if (!$event) {
+            return response()->json([
+                'message' => 'Detail peminjaman tidak tersedia'
+            ], 403);
+        }
 
         return response()->json([
-            'acara'          => $event->acara,
-            'jumlah_peserta' => $event->jumlah_peserta,
-            'waktu_mulai'    => $event->waktu_mulai->format('H:i'),
-            'waktu_selesai'  => $event->waktu_selesai->format('H:i'),
-            'bidang'         => $event->bidang->bidang ?? '-',
-            'sub_bidang'     => $event->bidang->sub_bidang ?? '-',
-            'ruangan'        => $event->ruangan->nama_ruangan ?? '-',
-            'no_wa'          => $event->no_wa ?? '-',
-            'catatan'        => $event->catatan ?? '-',
+            'acara'              => $event->acara,
+            'jumlah_peserta'     => $event->jumlah_peserta,
+            'waktu_mulai'        => $event->waktu_mulai->format('H:i'),
+            'waktu_selesai'      => $event->waktu_selesai->format('H:i'),
+            'bidang'             => $event->bidang->bidang ?? '-',
+            'sub_bidang'         => $event->bidang->sub_bidang ?? '-',
+            'ruangan'            => $event->ruangan->nama_ruangan ?? '-',
+            'no_wa'              => $event->no_wa ?? '-',
+            'catatan'            => $event->catatan ?? '-',
+            'status_peminjaman'  => $event->status_peminjaman,
         ]);
     }
+
 
     public function show($id)
     {
         $transaksi = Transaksi::with(['bidang', 'ruangan'])
-            ->findOrFail($id);
+            ->where('id_peminjaman', $id)
+            ->whereIn('status_peminjaman', ['menunggu', 'disetujui'])
+            ->first();
+
+        if (!$transaksi) {
+            return response()->json([
+                'message' => 'Detail peminjaman tidak tersedia'
+            ], 403);
+        }
 
         return response()->json($transaksi);
     }
