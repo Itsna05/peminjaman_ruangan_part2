@@ -102,7 +102,7 @@
 
             {{-- TABLE --}}
             <div class="riwayat-wrapper status-peminjaman-ruangan">
-                <div class="status-card">
+                <div class="status-card-table">
                     <div class="status-table-wrap search-item">
                         <table class="approval-table">
                             <thead>

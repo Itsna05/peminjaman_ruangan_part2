@@ -240,7 +240,7 @@ body {
     border-radius: 12px;
     padding: 12px;
     min-width: 220px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.12);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     display: none;
     flex-direction: column;
     gap: 8px;
@@ -274,7 +274,6 @@ body {
     background: #e1e9ff;
 }
 
-
 /* =========================
    DROPDOWN STATUS
 ========================= */
@@ -291,7 +290,7 @@ body {
     border-radius: 14px;
     padding: 8px;
     min-width: 200px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.12);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     display: none;
     flex-direction: column;
     z-index: 100;
@@ -331,7 +330,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
     .time-filter__menu,
     .status-filter__menu {
         position: fixed;
@@ -342,11 +340,7 @@ body {
         max-width: 320px;
         z-index: 2000;
     }
-
 }
-
-
-
 
 .time-filter__btn,
 .status-filter__btn {
@@ -374,7 +368,7 @@ body {
     padding: 10px;
     min-width: 180px;
     flex-direction: column;
-    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     z-index: 9999;
 }
 
@@ -582,7 +576,6 @@ body {
         justify-content: center;
     }
 }
-
 
 /* =========================
    FIX DROPDOWN KECLIP TABLE
@@ -822,7 +815,7 @@ body {
 /* Wrapper */
 .status-peminjaman-ruangan .status-table-wrap {
     width: 100%;
-    min-width: 1300px;
+    min-width: 100%;
     table-layout: fixed;
     padding-left: 28px;
     padding-right: 28px;
@@ -837,26 +830,23 @@ body {
     position: relative;
 }
 
-
 .status-peminjaman-ruangan .search-item,
-.status-peminjaman-ruangan .dash-slider,
+.status-peminjaman-ruangan .dash-slider {
+    overflow-x: hidden;
+    overflow-y: visible !important;
+}
 .status-peminjaman-ruangan .status-card {
-    overflow-x: hidden !important;
+    overflow-x: visible !important;
     overflow-y: visible !important;
 }
 
-
-.status-peminjaman-ruangan 
-.approval-table th:nth-child(6),
-.status-peminjaman-ruangan 
-.approval-table td:nth-child(6) {
+.status-peminjaman-ruangan .approval-table th:nth-child(6),
+.status-peminjaman-ruangan .approval-table td:nth-child(6) {
     width: 60px;
 }
 
-.status-peminjaman-ruangan 
-.approval-table th:nth-child(7),
-.status-peminjaman-ruangan 
-.approval-table td:nth-child(7) {
+.status-peminjaman-ruangan .approval-table th:nth-child(7),
+.status-peminjaman-ruangan .approval-table td:nth-child(7) {
     width: 120px;
 }
 
@@ -868,7 +858,7 @@ body {
 /* TABLE RESET & FIX */
 .approval-table {
     width: 100%;
-    min-width: 1300px;
+    min-width: 1000px !important;
     border-collapse: collapse;
     table-layout: fixed;
     background: #fff;
@@ -1519,7 +1509,7 @@ body {
     flex-direction: column;
 }
 
-.manajemen-peminjaman .status-card {
+.manajemen-peminjaman .status-card-table {
     overflow: visible;
 }
 
@@ -1915,7 +1905,7 @@ body {
     display: flex;
     gap: 30px;
     width: max-content;
-    padding-inline: calc(50% - 160px)
+    padding-inline: calc(50% - 160px);
 }
 
 .tambah-box {
@@ -1983,18 +1973,22 @@ body {
 .popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, 0.5);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    animation: fadeIn .25s ease;
+    animation: fadeIn 0.25s ease;
     backdrop-filter: blur(6px);
 }
 
 @keyframes fadeIn {
-    from {opacity: 0; }
-    to {opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* BOX POPUP */
@@ -2004,7 +1998,7 @@ body {
     max-width: 720px;
     max-height: 90vh;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -2075,7 +2069,7 @@ body {
     width: 42px;
     height: 42px;
     border: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
@@ -2111,14 +2105,13 @@ body {
     border-radius: 14px;
     padding: 20px;
     margin-bottom: 25px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, .05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
 .fasilitas-box h5 {
     font-weight: 700;
     margin-bottom: 15px;
 }
-
 
 .fasilitas-header h5 {
     margin: 0;
@@ -2175,7 +2168,7 @@ body {
     font-weight: 600;
     border: none;
     cursor: pointer;
-    transition: all .25s ease;
+    transition: all 0.25s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2237,7 +2230,7 @@ body {
     bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     border: none;
     padding: 6px 16px;
@@ -2258,8 +2251,8 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all .2s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, .15);
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-hapus-item i {
@@ -2287,7 +2280,6 @@ body {
     object-position: 50% 50%;
     user-select: none;
 }
-
 
 /* =========================
    GLOBAL
