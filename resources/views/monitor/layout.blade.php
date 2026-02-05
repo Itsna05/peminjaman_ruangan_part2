@@ -14,9 +14,10 @@
 <body class="monitor-body">
 
 <header class="monitor-header">
-    <div class="header-left">
+    <a class="header-left" href="/petugas/dashboard">
         <img src="{{ asset('img/logo_nav.png') }}" class="logo">
-    </div>
+    </a>
+
 
     <div class="header-center">
         <h4>PUSAT INFORMASI RUANGAN</h4>
