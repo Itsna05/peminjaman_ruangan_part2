@@ -886,46 +886,6 @@ body {
     font-size: 14px;
 }
 
-/* =========================
-   COLUMN WIDTH (KUNCI RAPI)
-   ========================= */
-
-.approval-table th:nth-child(1),
-.approval-table td:nth-child(1) {
-    width: 60px;
-}
-
-.approval-table th:nth-child(2),
-.approval-table td:nth-child(2) {
-    width: 180px;
-}
-
-.approval-table th:nth-child(3),
-.approval-table td:nth-child(3) {
-    width: 150px;
-}
-
-/* BIDANG → DIRAPATKAN */
-.approval-table th:nth-child(4),
-.approval-table td:nth-child(4) {
-    width: 260px; /* ⬅️ KUNCI UTAMA */
-    white-space: normal;
-    line-height: 1.4;
-}
-
-/* STATUS → LEBIH KECIL */
-.approval-table th:nth-child(5),
-.approval-table td:nth-child(5) {
-    width: 120px;
-    text-align: center;
-}
-
-/* AKSI → TETAP */
-.approval-table th:nth-child(6),
-.approval-table td:nth-child(6) {
-    width: 70px; /* ⬅️ biar langsung kelihatan */
-    text-align: center;
-}
 
 /* =========================
    STATUS BADGE
@@ -1033,7 +993,9 @@ body {
 ========================= */
 
 /* Wrapper */
-.table-responsive {
+.manajemen-peminjaman .riwayat-wrapper {
+    background: transparent;
+    padding: 0;          /* opsional, biar lebih clean */
     width: 100%;
     overflow-x: auto;
     overflow-x: auto;
@@ -1093,6 +1055,72 @@ body {
     vertical-align: middle;
     word-wrap: break-word;
     word-break: break-word;
+}
+
+/* =========================
+   ATUR JARAK BIDANG & STATUS
+   KHUSUS PERSETUJUAN PEMINJAMAN
+   ========================= */
+
+.manajemen-peminjaman .approval-table {
+    table-layout: fixed;
+}
+
+/* =====================================
+   RAPATKAN KOLOM NO & NAMA RUANGAN
+   KHUSUS HALAMAN PERSETUJUAN
+===================================== */
+
+.manajemen-peminjaman .approval-table {
+    table-layout: fixed;   /* ⬅️ KUNCI POSISI */
+    width: 100%;
+}
+
+/* NO */
+.manajemen-peminjaman .approval-table th:nth-child(1),
+.manajemen-peminjaman .approval-table td:nth-child(1) {
+    width: 40px;
+    padding-right: 8px;
+}
+
+/* NAMA RUANGAN */
+.manajemen-peminjaman .approval-table th:nth-child(2),
+.manajemen-peminjaman .approval-table td:nth-child(2) {
+    width: 160px;
+    padding-left: 8px;
+}
+
+
+/* SUB BIDANG */
+.manajemen-peminjaman .approval-table th:nth-child(3),
+.manajemen-peminjaman .approval-table td:nth-child(3) {
+    width: 180px;
+    padding-right: 8px;
+    white-space: normal;
+}
+
+/* BIDANG */
+.manajemen-peminjaman .approval-table th:nth-child(4),
+.manajemen-peminjaman .approval-table td:nth-child(4) {
+    width: 160px;
+    padding-left: 8px;
+    white-space: normal;
+}
+
+
+/* Kolom STATUS → dipersempit */
+.manajemen-peminjaman .approval-table th:nth-child(5),
+.manajemen-peminjaman .approval-table td:nth-child(5) {
+    width: 120px;          /* ⬅️ status lebih dekat */
+    padding-left: 6px;
+    text-align: center;
+}
+
+/* Kolom AKSI → kecil & tetap rapi */
+.manajemen-peminjaman .approval-table th:nth-child(6),
+.manajemen-peminjaman .approval-table td:nth-child(6) {
+    width: 70px;
+    text-align: center;
 }
 
 /* =========================
