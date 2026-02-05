@@ -1212,39 +1212,38 @@ body {
 }
 
 /* =========================
-   RESPONSIVE MOBILE
-   ========================= */
+   RESPONSIVE TABLE SCROLL
+   (RIWAYAT PEMINJAMAN)
+========================= */
 
 @media (max-width: 768px) {
+
+    .table-responsive,
+    .dash-slider {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .status-table {
+        min-width: 1600px; /* tetap utuh */
         font-size: 13px;
     }
 
-    .status-table thead {
-        display: none;
+    /* scrollbar mobile */
+    .dash-slider::-webkit-scrollbar {
+        height: 6px;
     }
 
-    .status-table tbody tr {
-        display: block;
-        margin-bottom: 16px;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 12px;
+    .dash-slider::-webkit-scrollbar-thumb {
+        background: #b5c7f3;
+        border-radius: 8px;
     }
 
-    .status-table tbody td {
-        display: flex;
-        justify-content: space-between;
-        border: none;
-        padding: 6px 0;
-    }
-
-    .status-table tbody td::before {
-        content: attr(data-label);
-        font-weight: 600;
-        color: #475569;
+    .dash-slider::-webkit-scrollbar-track {
+        background: #f1f4ff;
     }
 }
+
 
 /* ================= MODAL DETAIL PEMINJAMAN ================= */
 
