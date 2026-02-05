@@ -3,17 +3,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const icon = document.querySelector('.search-box i');
 
     function doSearch() {
-        const keyword = input.value.toLowerCase();
+        const keyword = input.value.toLowerCase().trim();
 
-        // CONTOH: filter card / table / list
-        document.querySelectorAll('.search-item').forEach(item => {
-            const text = item.innerText.toLowerCase();
-            item.style.display = text.includes(keyword) ? '' : 'none';
+        // AMBIL SEMUA BARIS TABEL
+        const rows = document.querySelectorAll('.status-table tbody tr');
+
+        rows.forEach(row => {
+            const rowText = row.innerText.toLowerCase();
+
+            // kalau keyword kosong → tampil semua
+            if (keyword === '') {
+                row.style.display = '';
+                return;
+            }
+
+            // filter per baris
+            if (rowText.includes(keyword)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
         });
     }
 
-    
     input.addEventListener('input', doSearch);
-    input.addEventListener('keyup', doSearch);
     icon.addEventListener('click', doSearch);
 });

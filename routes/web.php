@@ -43,6 +43,10 @@ Route::middleware(['CekLogin:petugas'])
         Route::get('/denah-ruangan', [DenahRuanganController::class, 'index'])
             ->name('denah');
 
+        Route::get('/transaksi/{id}', [DashboardController::class, 'show'])
+            ->name('transaksi.show');
+
+
        // ==========================
         // PEMINJAMAN RUANGAN
         // ==========================
