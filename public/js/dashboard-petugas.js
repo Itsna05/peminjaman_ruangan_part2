@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalElement = document.getElementById("modalDetailPeminjaman");
     const modal = new bootstrap.Modal(modalElement);
 
-    // 🔥 PAKSA BERSIH SAAT MODAL DITUTUP
+    // PAKSA BERSIH SAAT MODAL DITUTUP
     modalElement.addEventListener("hidden.bs.modal", function () {
         document.body.classList.remove("modal-open");
 
@@ -26,27 +26,17 @@ document.addEventListener("DOMContentLoaded", function () {
         currentIndex = eventsOfDay.indexOf(box.dataset.id);
 
         loadEvent(currentIndex);
-        modal.show();
+        modal.show(); 
     });
 
-    let eventCache = {};
     function loadEvent(index) {
-         const id = eventsOfDay[index];
-
-    if(eventCache[id]){
-        renderModal(eventCache[id], index);
-        return;
+        const id = eventsOfDay[index];
+        const data = ALL_EVENTS[id]; 
+        renderModal(data, index);
     }
 
-    fetch(`/petugas/peminjaman/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            eventCache[id] = data;
-            renderModal(data, index);
-        });
-    }
-        function renderModal(data, index) {
-            document.getElementById('modalDetailContent').innerHTML = `
+    function renderModal(data, index) {
+        document.getElementById('modalDetailContent').innerHTML = `
         <div class="modal-nav">
             <button class="nav-btn" onclick="prevEvent()" ${index === 0 ? 'disabled' : ''}>‹</button>
             <span class="nav-count">${index + 1} / ${eventsOfDay.length}</span>
@@ -60,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <p><strong>Ruangan</strong><br>${data.ruangan}</p>
         <p><strong>Catatan</strong><br>${data.catatan}</p>
     `;
-        }
+    }
 
     window.nextEvent = function () {
         if (currentIndex < eventsOfDay.length - 1) {

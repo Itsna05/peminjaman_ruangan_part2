@@ -269,6 +269,11 @@ function toggleMore(el) {
         : '▼ Lihat lainnya';
 }
 </script>
+
+<script>
+    window.ALL_EVENTS = @json($eventsForJs);
+</script>
+
 @include('petugas.partials.modal-detail-peminjaman')
 
 @endsection

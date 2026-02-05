@@ -40,10 +40,26 @@ class DashboardController extends Controller
             ->orderBy('waktu_mulai')
             ->get();
 
+        $eventsForJs = $eventsMonth->mapWithKeys(function ($e) {
+            return [
+                $e->id_peminjaman => [
+                    'acara' => $e->acara,
+                    'jumlah_peserta' => $e->jumlah_peserta,
+                    'waktu_mulai' => $e->waktu_mulai->format('H:i'),
+                    'waktu_selesai' => $e->waktu_selesai->format('H:i'),
+                    'bidang' => $e->bidang->bidang ?? '-',
+                    'sub_bidang' => $e->bidang->sub_bidang ?? '-',
+                    'ruangan' => $e->ruangan->nama_ruangan ?? '-',
+                    'catatan' => $e->catatan ?? '-',
+                ]
+            ];
+        });
+
         return view('petugas.dashboard', compact(
             'currentDate',
             'eventsMonth',
-            'eventsToday'
+            'eventsToday',
+            'eventsForJs' 
         ));
     }
 
