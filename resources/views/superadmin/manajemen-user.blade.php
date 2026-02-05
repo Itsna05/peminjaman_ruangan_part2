@@ -357,12 +357,26 @@
                     {{-- PASSWORD --}}
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Password</label>
-                        <input type="password"
-                               name="password"
-                               class="form-control"
-                               placeholder="Masukkan password"
-                               required>
+
+                        <div class="input-group">
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control password-input"
+                                placeholder="Masukkan password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary toggle-password"
+                            >
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
                     </div>
+
+
 
                     {{-- PERAN --}}
                     <div class="mb-3">
