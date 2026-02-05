@@ -108,7 +108,7 @@
         {{-- Copyright & Sosmed --}}
         <div class="d-flex justify-content-between align-items-center flex-wrap small">
             <span>
-                Copyright © 2018 | DPU Bina Marga dan Cipta Karya. All rights reserved.
+                Copyright © 2026 | DPU Bina Marga dan Cipta Karya. All rights reserved.
             </span>
 
             {{-- Sosial Media --}}

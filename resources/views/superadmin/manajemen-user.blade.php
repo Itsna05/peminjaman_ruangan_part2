@@ -144,16 +144,16 @@
                 </div>
 
                 <div class="d-flex gap-2">
-                    <div class="filter-box user-filter-box">
-                        <button class="form-select user-filter-btn" type="button" id="filterToggle">
+                    <div class="user-filter-box">
+                        <button class="user-filter-btn" type="button" id="filterToggle">
                             Filter
                             <span class="arrow">▾</span>
                         </button>
 
-                        <div class="filter-dropdown d-none user-filter-dropdown" id="filterDropdown">
-                            <button class="filter-item" data-value="">Semua</button>
-                            <button class="filter-item" data-value="superadmin">Super Admin</button>
-                            <button class="filter-item" data-value="petugas">Petugas</button>
+                        <div class="filter-dropdown" id="filterDropdown">
+                            <button class="filter-item fw-bold" data-value="">Semua</button>
+                            <button class="filter-item fw-bold" data-value="superadmin">Super Admin</button>
+                            <button class="filter-item fw-bold" data-value="petugas">Petugas</button>
                         </div>
                     </div>
 
