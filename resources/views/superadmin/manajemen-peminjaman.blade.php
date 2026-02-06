@@ -81,7 +81,7 @@
                     <button type="button" class="search-btn">
                         <i class="bi bi-search"></i>
                     </button>
-                    <input type="text" placeholder="Pencarian" id="searchInput">
+                    <input type="text" placeholder="Pencarian" id="searchInputPersetujuan">
                 </div>
 
                 <div class="filter-box">

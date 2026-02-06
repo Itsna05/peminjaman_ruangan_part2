@@ -25,6 +25,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>
+    <script src="{{ asset('js/persetujuan-search.js') }}"></script>
     <script src="{{ asset('js/item.js') }}"></script>
     <script src="{{ asset('js/filter-item.js') }}"></script>
     <script src="{{ asset('js/unduh-item.js') }}"></script>

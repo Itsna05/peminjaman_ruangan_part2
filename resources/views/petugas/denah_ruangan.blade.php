@@ -37,91 +37,90 @@
 <section class="detail-ruangan-section">
     <div class="container">
         <h3 class="text-center fw-bold mb-5">Detail Ruangan</h3>
-
         <div class="ruangan-slider">
             <div class="ruangan-track">
-        <div class="ruangan-track">
 
-        @foreach ($ruangan as $r)
-        <div class="detail-card">
+                @foreach ($ruangan as $r)
+                <div class="detail-card">
 
-            <div class="detail-card-header">DETAIL RUANGAN</div>
+                    <div class="detail-card-header">DETAIL RUANGAN</div>
 
-            {{-- IMAGE --}}
-            <div class="detail-card-image">
-                @if ($r->gambar->count())
+                    {{-- IMAGE --}}
+                    <div class="detail-card-image">
+                        @if ($r->gambar->count())
 
-                    <div id="foto-ruangan-{{ $r->id_ruangan }}"
-                        class="carousel slide foto-carousel"
-                        data-bs-touch="false"
-                        data-bs-interval="false">
+                            <div id="foto-ruangan-{{ $r->id_ruangan }}"
+                                class="carousel slide foto-carousel"
+                                data-bs-touch="false"
+                                data-bs-interval="false">
 
-                        <div class="carousel-inner">
-                            @foreach ($r->gambar as $index => $g)
-                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('img/ruangan/'.$g->nama_file) }}">
+                                <div class="carousel-inner">
+                                    @foreach ($r->gambar as $index => $g)
+                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                            <img src="{{ asset('img/ruangan/'.$g->nama_file) }}">
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
+
+                                <button class="carousel-control-prev"
+                                        type="button"
+                                        data-bs-target="#foto-ruangan-{{ $r->id_ruangan }}"
+                                        data-bs-slide="prev">
+                                </button>
+
+                                <button class="carousel-control-next"
+                                        type="button"
+                                        data-bs-target="#foto-ruangan-{{ $r->id_ruangan }}"
+                                        data-bs-slide="next">
+                                </button>
+
+                            </div>
+
+                        @else
+                            <img src="{{ asset('img/default_ruangan.png') }}" class="img-fluid">
+                        @endif
+                    </div>
+
+
+
+
+                    {{-- BODY --}}
+                    <div class="detail-card-body">
+                        <h5 class="detail-card-title">{{ $r->nama_ruangan }}</h5>
+
+                        <div class="detail-card-info">
+
+                            {{-- ELEKTRONIK --}}
+                            <div class="info-label">
+                                <h6>Elektronik</h6>
+                                <ul>
+                                    @forelse ($r->sarana->where('jenis_sarana','elektronik') as $s)
+                                        <li>{{ $s->nama_sarana }} : {{ $s->jumlah }}</li>
+                                    @empty
+                                        <li>-</li>
+                                    @endforelse
+                                </ul>
+                            </div>
+
+                            {{-- NON ELEKTRONIK --}}
+                            <div class="info-label">
+                                <h6>Non Elektronik</h6>
+                                <ul>
+                                    @forelse ($r->sarana->where('jenis_sarana','non-elektronik') as $s)
+                                        <li>{{ $s->nama_sarana }} : {{ $s->jumlah }}</li>
+                                    @empty
+                                        <li>-</li>
+                                    @endforelse
+                                </ul>
+                            </div>
+
                         </div>
-
-                        <button class="carousel-control-prev"
-                                type="button"
-                                data-bs-target="#foto-ruangan-{{ $r->id_ruangan }}"
-                                data-bs-slide="prev">
-                        </button>
-
-                        <button class="carousel-control-next"
-                                type="button"
-                                data-bs-target="#foto-ruangan-{{ $r->id_ruangan }}"
-                                data-bs-slide="next">
-                        </button>
-
-                    </div>
-
-                @else
-                    <img src="{{ asset('img/default_ruangan.png') }}" class="img-fluid">
-                @endif
-            </div>
-
-
-
-
-            {{-- BODY --}}
-            <div class="detail-card-body">
-                <h5 class="detail-card-title">{{ $r->nama_ruangan }}</h5>
-
-                <div class="detail-card-info">
-
-                    {{-- ELEKTRONIK --}}
-                    <div class="info-label">
-                        <h6>Elektronik</h6>
-                        <ul>
-                            @forelse ($r->sarana->where('jenis_sarana','elektronik') as $s)
-                                <li>{{ $s->nama_sarana }} : {{ $s->jumlah }}</li>
-                            @empty
-                                <li>-</li>
-                            @endforelse
-                        </ul>
-                    </div>
-
-                    {{-- NON ELEKTRONIK --}}
-                    <div class="info-label">
-                        <h6>Non Elektronik</h6>
-                        <ul>
-                            @forelse ($r->sarana->where('jenis_sarana','non-elektronik') as $s)
-                                <li>{{ $s->nama_sarana }} : {{ $s->jumlah }}</li>
-                            @empty
-                                <li>-</li>
-                            @endforelse
-                        </ul>
                     </div>
 
                 </div>
+                @endforeach
             </div>
-
         </div>
-        @endforeach
-
     </div>
 </section>
 @endsection

@@ -1,8 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ===============================
+    // GUARD: JIKA BUKAN HALAMAN TABEL
+    // ===============================
     const tableBody = document.getElementById("tableBody");
     const rowsPerPageSelect = document.getElementById("rowsPerPage");
     const pagination = document.getElementById("pagination");
 
+    // ⛔ kalau salah satu tidak ada, STOP JS ini
+    if (!tableBody || !rowsPerPageSelect || !pagination) {
+        return;
+    }
+
+    // ===============================
+    // KODE LAMA (TIDAK DIUBAH)
+    // ===============================
     let currentPage = 1;
 
     function paginate() {

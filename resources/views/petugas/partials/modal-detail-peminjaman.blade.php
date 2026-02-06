@@ -4,7 +4,16 @@
 
             <div class="modal-header text-white">
                 <h5 class="modal-title">Detail Peminjaman</h5>
-                <button type="button" class="btn-close btn-close-white"
+
+                <!-- NAVIGASI EVENT -->
+                <div class="event-pagination ms-auto">
+                    <button id="prevEvent" class="event-nav-btn">&lsaquo;</button>
+                    <span id="eventCounter" class="event-counter">1 / 1</span>
+                    <button id="nextEvent" class="event-nav-btn">&rsaquo;</button>
+                </div>
+
+
+                <button type="button" class="btn-close btn-close-white ms-2"
                     data-bs-dismiss="modal"></button>
             </div>
 
