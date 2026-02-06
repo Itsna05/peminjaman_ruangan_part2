@@ -174,18 +174,23 @@
                                         id="timeFilterMenu"
                                         data-dropdown-menu
                                     >
-                                        <input type="date" id="timeFilterFrom" class="time-filter__input">
-                                        <input type="date" id="timeFilterTo"   class="time-filter__input">
+                                    <input
+                                            type="text"
+                                            id="timeFilter"
+                                            class="time-filter__input"
+                                            placeholder="Pilih Bulan & Tahun"
+                                            readonly
+                                        >
 
-
-                                        <button type="button" class="time-filter__clear" id="timeFilterClear">
-                                            Tampilkan Semua
+                                        <button
+                                            type="button"
+                                            class="time-filter__clear"
+                                            id="timeFilterClear"
+                                        >
+                                            Reset
                                         </button>
                                     </div>
                                 </th>
-
-
-
 
                                 <th>Bidang</th>
                                 <th>No WhatsApp</th>

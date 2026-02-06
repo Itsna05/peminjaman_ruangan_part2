@@ -1,41 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("FILTER + PAGINATION LOADED");
-
-    /* =========================
-       ELEMENT
-    ========================= */
-    const tableBody = document.getElementById("tableBody");
-    const rowsPerPageSelect = document.getElementById("rowsPerPage");
-    const pagination = document.getElementById("pagination");
-
-    const rows = Array.from(tableBody.querySelectorAll("tr"));
+    /* ======================
+       DROPDOWN SYSTEM
+    ====================== */
 
     const dropdownButtons = document.querySelectorAll("[data-dropdown-button]");
+
     const dropdownMenus = document.querySelectorAll("[data-dropdown-menu]");
 
-    const statusItems = document.querySelectorAll(".status-filter__item");
-
-    const fromInput = document.getElementById("timeFilterFrom");
-    const toInput = document.getElementById("timeFilterTo");
-    const timeClear = document.getElementById("timeFilterClear");
-
-    /* =========================
-       STATE
-    ========================= */
-    let selectedStatus = "";
-    let selectedFrom = "";
-    let selectedTo = "";
-
-    window.currentPage = 1;
-    window.filteredRows = [];
-
-    /* =========================
-       DROPDOWN
-    ========================= */
     function closeAllDropdowns() {
-        dropdownMenus.forEach((menu) => {
-            menu.classList.remove("is-open");
-        });
+        dropdownMenus.forEach((menu) => menu.classList.remove("is-open"));
     }
 
     dropdownButtons.forEach((button) => {
@@ -44,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             e.stopPropagation();
 
             const targetId = this.dataset.dropdownButton;
+
             const menu = document.getElementById(targetId);
 
             if (!menu) return;
@@ -59,19 +33,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     dropdownMenus.forEach((menu) => {
-        menu.addEventListener("click", (e) => {
+        menu.addEventListener("click", function (e) {
             e.stopPropagation();
         });
     });
 
     document.addEventListener("click", closeAllDropdowns);
 
-    /* =========================
-       FILTER STATUS
-    ========================= */
-    statusItems.forEach((item) => {
+    /* ======================
+       FILTER STATE
+    ====================== */
+
+    let selectedStatus = "";
+    let selectedMonth = "";
+    let selectedYear = "";
+
+    window.currentPage = 1;
+
+    /* ======================
+       STATUS FILTER
+    ====================== */
+
+    document.querySelectorAll(".status-filter__item").forEach((item) => {
         item.addEventListener("click", function () {
-            statusItems.forEach((i) => i.classList.remove("is-active"));
+            document
+                .querySelectorAll(".status-filter__item")
+                .forEach((i) => i.classList.remove("is-active"));
 
             this.classList.add("is-active");
 
@@ -83,64 +70,108 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    /* =========================
-       FILTER WAKTU
-    ========================= */
-    if (fromInput) {
-        fromInput.addEventListener("change", function () {
-            selectedFrom = this.value;
-            applyFilter();
+    /* ======================
+       TIME FILTER
+    ====================== */
+
+    const timeInput = document.getElementById("timeFilter");
+    const timeClear = document.getElementById("timeFilterClear");
+
+    let picker = null;
+
+    // Init Flatpickr
+    if (timeInput) {
+        picker = flatpickr("#timeFilter", {
+            plugins: [
+                new monthSelectPlugin({
+                    shorthand: true,
+                    dateFormat: "Y-m",
+                    altFormat: "F Y",
+                    altInput: true,
+                }),
+            ],
+
+            onChange: function (selectedDates, dateStr) {
+                if (dateStr) {
+                    const parts = dateStr.split("-");
+
+                    selectedYear = parts[0];
+                    selectedMonth = parts[1];
+
+                    applyFilter();
+                }
+            },
         });
     }
 
-    if (toInput) {
-        toInput.addEventListener("change", function () {
-            selectedTo = this.value;
-            applyFilter();
-        });
-    }
+    // Reset
+    timeClear?.addEventListener("click", function () {
+        selectedMonth = "";
+        selectedYear = "";
 
-    if (timeClear) {
-        timeClear.addEventListener("click", function () {
-            selectedFrom = "";
-            selectedTo = "";
+        if (picker) {
+            picker.clear();
+        }
 
-            fromInput.value = "";
-            toInput.value = "";
+        applyFilter();
+        closeAllDropdowns();
+    });
 
-            applyFilter();
-        });
-    }
-
-    /* =========================
+    /* ======================
        APPLY FILTER
-    ========================= */
+    ====================== */
+
     function applyFilter() {
-        window.filteredRows = [];
+        const rows = document.querySelectorAll("#tableBody tr");
 
         rows.forEach((row) => {
-            const rowStatus = row.dataset.status || "";
+            const status = row.dataset.status || "";
 
-            const dateCell = row.querySelector("[data-date]");
-            const date = dateCell ? dateCell.dataset.date : "";
+            const date = row.querySelector("[data-date]")?.dataset.date || "";
 
-            const matchStatus = !selectedStatus || rowStatus === selectedStatus;
+            const year = date.substring(0, 4);
+            const month = date.substring(5, 7);
+
+            const matchStatus = !selectedStatus || status === selectedStatus;
 
             const matchTime =
-                (!selectedFrom || date >= selectedFrom) &&
-                (!selectedTo || date <= selectedTo);
+                (!selectedMonth || month === selectedMonth) &&
+                (!selectedYear || year === selectedYear);
 
-            if (matchStatus && matchTime) {
-                window.filteredRows.push(row);
-            }
+            row.classList.toggle("filtered-out", !(matchStatus && matchTime));
         });
 
+        // reset page
         currentPage = 1;
 
-        updateURL();
-
-        if (typeof window.paginate === "function") {
+        if (window.paginate) {
             window.paginate();
         }
     }
+
+    /* ======================
+   FIX POSITION DROPDOWN (FLOATING)
+====================== */
+
+    function positionDropdown(button, menu) {
+        const rect = button.getBoundingClientRect();
+
+        menu.style.position = "fixed";
+        menu.style.top = rect.bottom + 8 + "px";
+        menu.style.left = rect.left + "px";
+        menu.style.zIndex = "99999";
+    }
+
+    dropdownButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            const targetId = this.dataset.dropdownButton;
+            const menu = document.getElementById(targetId);
+
+            if (!menu) return;
+
+            if (menu.classList.contains("is-open")) {
+                positionDropdown(this, menu);
+            }
+        });
+    });
 });
