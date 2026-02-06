@@ -176,7 +176,7 @@ body {
     background: #ffffff;
     border-radius: 22px;
     padding: 26px 28px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
@@ -244,7 +244,7 @@ body {
     border: 1px solid #cfd8ea;
     border-radius: 12px;
     padding: 12px;
-    min-width: 220px;
+    min-width: 160px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     display: none;
     flex-direction: column;
@@ -254,6 +254,8 @@ body {
 
 .time-filter__menu.is-open {
     display: flex;
+    width: fit-content; /* lebar normal */
+    max-width: 90vw;
 }
 
 .time-filter__input {
@@ -304,6 +306,8 @@ body {
 .status-filter__menu.is-open {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    min-width: 150px;
 }
 
 .status-filter__item {
@@ -367,7 +371,7 @@ body {
     display: none;
     position: absolute;
     top: calc(100% + 6px);
-    right: 0;
+    left: 0;
     background: #fff;
     border-radius: 12px;
     padding: 10px;
@@ -563,6 +567,15 @@ body {
     color: #ffffff;
 }
 
+.filtered-out {
+    display: none !important;
+}
+
+.empty-row td {
+    height: 48px;
+    color: #aaa;
+    text-align: center;
+}
 /* =========================
    MOBILE
 ========================= */
@@ -891,7 +904,6 @@ body {
     font-size: 14px;
 }
 
-
 /* =========================
    STATUS BADGE
    ========================= */
@@ -1000,7 +1012,7 @@ body {
 /* Wrapper */
 .manajemen-peminjaman .riwayat-wrapper {
     background: transparent;
-    padding: 0;          /* opsional, biar lebih clean */
+    padding: 0; /* opsional, biar lebih clean */
     width: 100%;
     overflow-x: auto;
     overflow-x: auto;
@@ -1019,7 +1031,7 @@ body {
 .dash-slider {
     width: 100%;
     overflow-x: auto !important;
-    overflow-y: hidden;
+    overflow-y: visible;
     background: rgba(255, 0, 0, 0.05);
 }
 
@@ -1077,7 +1089,7 @@ body {
 ===================================== */
 
 .manajemen-peminjaman .approval-table {
-    table-layout: fixed;   /* ⬅️ KUNCI POSISI */
+    table-layout: fixed; /* ⬅️ KUNCI POSISI */
     width: 100%;
 }
 
@@ -1095,7 +1107,6 @@ body {
     padding-left: 8px;
 }
 
-
 /* SUB BIDANG */
 .manajemen-peminjaman .approval-table th:nth-child(3),
 .manajemen-peminjaman .approval-table td:nth-child(3) {
@@ -1112,11 +1123,10 @@ body {
     white-space: normal;
 }
 
-
 /* Kolom STATUS → dipersempit */
 .manajemen-peminjaman .approval-table th:nth-child(5),
 .manajemen-peminjaman .approval-table td:nth-child(5) {
-    width: 120px;          /* ⬅️ status lebih dekat */
+    width: 120px; /* ⬅️ status lebih dekat */
     padding-left: 6px;
     text-align: center;
 }
@@ -1250,7 +1260,6 @@ body {
 ========================= */
 
 @media (max-width: 768px) {
-
     .table-responsive,
     .dash-slider {
         overflow-x: auto;
@@ -1276,7 +1285,6 @@ body {
         background: #f1f4ff;
     }
 }
-
 
 /* ================= MODAL DETAIL PEMINJAMAN ================= */
 
@@ -2540,4 +2548,16 @@ body {
     padding: 6px 12px;
     border-radius: 20px;
     font-weight: 500;
+}
+
+.status-filter-wrap,
+.time-filter-wrap {
+    position: relative;
+}
+
+.status-filter__menu,
+.time-filter__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
 }

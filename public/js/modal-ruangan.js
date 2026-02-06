@@ -237,18 +237,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const tbody = document.getElementById(targetTabel);
             const no = tbody.children.length + 1;
 
-            tbody.innerHTML += `
-      <tr>
-        <td>${no}</td>
-        <td><input class="form-control" value="${nama}"></td>
-        <td><input type="number" class="form-control" value="${jumlah}"></td>
-        <td>
-          <button class="btn-hapus-item" title="Hapus">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-    `;
+            tbody.insertAdjacentHTML("beforeend", `
+            <tr>
+                <td>${no}</td>
+                <td><input class="form-control" value="${nama}"></td>
+                <td><input type="number" class="form-control" value="${jumlah}"></td>
+                <td>
+                <button class="btn-hapus-item" title="Hapus">
+                    <i class="bi bi-trash"></i>
+                </button>
+                </td>
+            </tr>
+            `);
 
             document.getElementById("popupTambahFasilitas").style.display =
                 "none";
@@ -619,6 +619,20 @@ document.addEventListener("DOMContentLoaded", function () {
             img.dataset.posY = posY;
         });
     });
+
+    // ================= AUTO SYNC EDIT TABLE → DATASET =================
+    document.addEventListener("input", function (e) {
+        if (!e.target.closest("#editElektronik tr, #editNonElektronik tr")) return;
+
+        const card = window._currentCard;
+        if (!card) return;
+
+        const elektronik = ambilDataTabel("editElektronik");
+        const non = ambilDataTabel("editNonElektronik");
+
+        card.dataset.elektronik = JSON.stringify(elektronik);
+        card.dataset.nonelektronik = JSON.stringify(non);
+    });
 });
 
 // ================= FUNCTIONS =================
@@ -649,51 +663,48 @@ function renderTable(data, target) {
     const tbody = document.getElementById(target);
     tbody.innerHTML = "";
     data.forEach((item, i) => {
-        tbody.innerHTML += `
-      <tr>
-        <td>${i + 1}</td>
-        <td>${item.nama}</td>
-        <td>${item.jumlah}</td>
-      </tr>`;
+        tbody.insertAdjacentHTML("beforeend", `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${item.nama}</td>
+          <td>${item.jumlah}</td>
+        </tr>`);
     });
 }
 
 function isiFormEdit() {
-    document.getElementById("editNama").value =
-        document.getElementById("popupNama").value;
+    const card = window._currentCard;
+    if (!card) return;
+
+    document.getElementById("editNama").value = card.dataset.nama;
+
+    const dataElektronik = JSON.parse(card.dataset.elektronik || "[]");
+    const dataNon = JSON.parse(card.dataset.nonelektronik || "[]");
 
     const editEl = document.getElementById("editElektronik");
-    editEl.innerHTML = "";
-
-    document.querySelectorAll("#popupElektronik tr").forEach((row, i) => {
-        editEl.innerHTML += `
-      <tr>
-        <td>${i + 1}</td>
-        <td><input class="form-control" value="${row.children[1].innerText}"></td>
-        <td><input type="number" class="form-control" value="${row.children[2].innerText}"></td>
-        <td>
-          <button class="btn-hapus-item" title="Hapus">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>`;
-    });
-
     const editNon = document.getElementById("editNonElektronik");
+
+    editEl.innerHTML = "";
     editNon.innerHTML = "";
 
-    document.querySelectorAll("#popupNonElektronik tr").forEach((row, i) => {
-        editNon.innerHTML += `
-      <tr>
-        <td>${i + 1}</td>
-        <td><input class="form-control" value="${row.children[1].innerText}"></td>
-        <td><input type="number" class="form-control" value="${row.children[2].innerText}"></td>
-        <td>
-          <button class="btn-hapus-item" title="Hapus">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>`;
+    dataElektronik.forEach((item, i) => {
+        editEl.insertAdjacentHTML("beforeend", `
+        <tr>
+            <td>${i + 1}</td>
+            <td><input class="form-control" value="${item.nama}"></td>
+            <td><input type="number" class="form-control" value="${item.jumlah}"></td>
+            <td><button class="btn-hapus-item"><i class="bi bi-trash"></i></button></td>
+        </tr>`);
+    });
+
+    dataNon.forEach((item, i) => {
+        editNon.insertAdjacentHTML("beforeend", `
+        <tr>
+            <td>${i + 1}</td>
+            <td><input class="form-control" value="${item.nama}"></td>
+            <td><input type="number" class="form-control" value="${item.jumlah}"></td>
+            <td><button class="btn-hapus-item"><i class="bi bi-trash"></i></button></td>
+        </tr>`);
     });
 }
 
