@@ -146,6 +146,11 @@ body {
     color: #16a34a;
 }
 
+.summary-card {
+    min-height: 130px;
+}
+
+
 /* =========================
    RIWAYAT PEMINJAMAN
 ========================= */

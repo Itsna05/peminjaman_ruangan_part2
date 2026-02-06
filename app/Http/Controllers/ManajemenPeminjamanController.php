@@ -54,6 +54,36 @@ public function detail($id)
     ]);
 }
 
+// ==========================
+// SETUJUI PEMINJAMAN
+// ==========================
+public function approve($id)
+{
+    $peminjaman = Transaksi::findOrFail($id);
+    $peminjaman->status_peminjaman = 'Disetujui';
+    $peminjaman->save();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Peminjaman berhasil disetujui'
+    ]);
+}
+
+// ==========================
+// TOLAK PEMINJAMAN
+// ==========================
+public function reject($id)
+{
+    $peminjaman = Transaksi::findOrFail($id);
+    $peminjaman->status_peminjaman = 'Ditolak';
+    $peminjaman->save();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Peminjaman berhasil ditolak'
+    ]);
+}
+
 
 }
 

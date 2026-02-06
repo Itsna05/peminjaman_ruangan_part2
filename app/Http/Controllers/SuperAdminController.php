@@ -29,6 +29,7 @@ class SuperAdminController extends Controller
         // =====================
         // RUANGAN
         // =====================
+        
         $totalRuangan = Ruangan::count();
 
         // Ruangan tersedia HARI INI
@@ -38,7 +39,7 @@ class SuperAdminController extends Controller
                 ->whereDate('waktu_mulai', Carbon::today())
                 ->where('status_peminjaman', 'Disetujui');
         })->count();
-
+        
         // =====================
         // GRAFIK BULANAN
         // =====================

@@ -39,6 +39,7 @@
     <script src="{{ asset('js/peminjaman-form-tambah.js') }}"></script>
     <script src="{{ asset('js/edit_peminjaman.js') }}"></script>
     <script src="{{ asset('js/filter-dropdown.js') }}"></script>
+    <script src="{{ asset('js/persetujuan.js') }}"></script>
 
 
 

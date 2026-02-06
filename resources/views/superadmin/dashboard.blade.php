@@ -40,34 +40,29 @@
    SUMMARY CARD
    ======================= --}}
 <section> 
-    <div class="container my-4">
-        <div class="row g-3">
+    
+     <div class="container my-4">
 
-            <div class="col-md-4">
-                <div class="summary-card">
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <div class="summary-card h-100">
                     <p>Total Peminjaman</p>
                     <h3>{{ $totalPeminjaman }}</h3>
                     <small>+2 dari bulan lalu</small>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="summary-card warning">
+            <div class="col-md-6">
+                <div class="summary-card warning h-100">
                     <p>Menunggu Persetujuan</p>
                     <h3>{{ $menunggu }}</h3>
                     <small>Perlu tindakan</small>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="summary-card success">
-                    <p>Ruangan Tersedia</p>
-                    <h3>{{ $ruanganTersedia }} / {{ $totalRuangan }}</h3>
-                    <small>Hari ini</small>
-                </div>
-            </div>
-
         </div>
+
     </div>
 
     {{-- =======================
