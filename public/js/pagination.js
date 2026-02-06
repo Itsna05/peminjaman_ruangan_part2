@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // ===============================
     // KODE LAMA (TIDAK DIUBAH)
     // ===============================
+
+    let currentPage = 1;
+
     window.paginate = function () {
         const visibleRows = Array.from(
             tableBody.querySelectorAll("tr:not(.filtered-out)"),
