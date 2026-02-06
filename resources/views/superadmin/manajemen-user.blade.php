@@ -49,7 +49,7 @@
                     <i class="bi bi-plus-circle"></i>
             </button>
         </div>
-        <div>
+        <div class="user-table-responsive">
             <div class="search-item">
                 <table class="approval-table user-table">
                     <thead class="table-light text-center">
@@ -91,7 +91,7 @@
 
                 </table>
             </div>
-            
+        </div>    
             <div class="status-footer">
                 <div class="rows-info">
                     Jumlah Baris :
@@ -104,8 +104,6 @@
 
                 <div class="pagination" id="pagination"></div>
             </div>
-
-        </div>
     </div>
 
 </section>
@@ -150,7 +148,7 @@
                             <span class="arrow">▾</span>
                         </button>
 
-                        <div class="filter-dropdown" id="filterDropdown">
+                        <div class="filter-dropdown d-none user-filter-dropdown" id="filterDropdown">
                             <button class="filter-item fw-bold" data-value="">Semua</button>
                             <button class="filter-item fw-bold" data-value="superadmin">Super Admin</button>
                             <button class="filter-item fw-bold" data-value="petugas">Petugas</button>
@@ -168,7 +166,7 @@
                 </div>
             </div>
 
-            <div class="user-table-responsive">
+            
                 <div class="user-table-responsive">
                     <table class="table table-bordered align-middle user-table">
                         <thead class="table-light text-center">
@@ -227,7 +225,7 @@
 
 
                 <div class="pagination" id="pagination"></div>
-            </div>
+            
             </div>
     </div>
 
