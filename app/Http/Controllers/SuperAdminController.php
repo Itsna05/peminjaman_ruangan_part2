@@ -136,6 +136,25 @@ class SuperAdminController extends Controller
     //     return back()->with('success', 'User berhasil ditambahkan');
     // }
 
+    // public function updateUser(Request $request)
+    // {
+    //     $request->validate([
+    //         'id_user' => 'required',
+    //         'nama' => 'required',
+    //         'username' => 'required|unique:user,username,' . $request->id_user . ',id_user',
+    //         'role' => 'required|in:superadmin,petugas',
+    //     ]);
+
+    //     DB::table('user')
+    //         ->where('id_user', $request->id_user)
+    //         ->update([
+    //             'nama' => $request->nama,
+    //             'username' => $request->username,
+    //             'role' => $request->role,
+    //         ]);
+
+    //     return back()->with('success', 'User berhasil diupdate');
+    // }
     public function updateUser(Request $request)
     {
         $request->validate([
@@ -143,15 +162,24 @@ class SuperAdminController extends Controller
             'nama' => 'required',
             'username' => 'required|unique:user,username,' . $request->id_user . ',id_user',
             'role' => 'required|in:superadmin,petugas',
+            // password TIDAK wajib
+            'password' => 'nullable|min:6',
         ]);
+
+        $data = [
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'role' => $request->role,
+        ];
+
+        // 👉 INI KUNCI UTAMANYA
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
 
         DB::table('user')
             ->where('id_user', $request->id_user)
-            ->update([
-                'nama' => $request->nama,
-                'username' => $request->username,
-                'role' => $request->role,
-            ]);
+            ->update($data);
 
         return back()->with('success', 'User berhasil diupdate');
     }

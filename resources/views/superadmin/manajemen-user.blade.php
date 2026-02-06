@@ -213,7 +213,7 @@
                         </tbody>
                     </table>
                 </div>
-
+            </div>
                 <div class="status-footer">
                 <div class="rows-info">
                     Jumlah Baris :
@@ -440,6 +440,26 @@
                             <option value="superadmin">Super Admin</option>
                             <option value="petugas">Petugas</option>
                         </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Password</label>
+
+                        <div class="input-group">
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control password-input"
+                                placeholder="Kosongkan jika tidak ingin mengganti password"
+                            >
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary toggle-password"
+                            >
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
