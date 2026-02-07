@@ -6,17 +6,16 @@
 }
 
 .monitor-body {
-    background: 
-        url('../img/bg-monitor.png') center center / cover no-repeat;
-    
-    font-family: 'Segoe UI', sans-serif;
+    background: url("../img/bg-monitor.png") center center / cover no-repeat;
+
+    font-family: "Segoe UI", sans-serif;
 }
 
 /* HEADER */
 .monitor-header {
     min-height: 100px;
     max-height: 250px;
-    background: #15468A;
+    background: #15468a;
     color: #fff;
     display: flex;
     align-items: center;
@@ -93,14 +92,17 @@
     background: #fff;
     border-radius: 16px;
     padding: 16px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 @keyframes slide-left {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
-
 
 /* BADGE */
 .badge-status.red {
@@ -126,8 +128,6 @@
     position: relative;
 }
 
-
-
 /* HEADER TABEL */
 .monitor-table-head {
     width: 100%;
@@ -137,12 +137,12 @@
 .monitor-table-head th {
     padding: 12px;
     text-align: left;
-    border-bottom: 3px solid #15468A;
+    border-bottom: 3px solid #15468a;
 }
 
 /* WRAPPER BODY (SCROLL AREA) */
 .table-body-wrapper {
-    height: 200px;              /* ATUR TINGGI SCROLL */
+    height: 200px; /* ATUR TINGGI SCROLL */
     overflow: hidden;
     position: relative;
 }
@@ -168,7 +168,6 @@
         transform: translateY(-50%);
     }
 }
-
 
 /* =========================
    GALLERY CONTAINER
@@ -208,8 +207,18 @@
 /* GAMBAR */
 .slide img {
     width: clamp(260px, 28vw, 520px);
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.35),
+        0 0 0 2px rgba(255, 255, 255, 0.12);
+
+    background: #000;
+
+    transition: all 0.6s ease;
 }
 
 /* TENGAH (AKTIF) */
@@ -223,15 +232,15 @@
 
 /* KIRI */
 .slide.prev {
-    opacity: .6;
-    transform: translateX(-420px) scale(.75);
+    opacity: 0.6;
+    transform: translateX(-420px) scale(0.75);
     z-index: 2;
 }
 
 /* KANAN */
 .slide.next {
-    opacity: .6;
-    transform: translateX(420px) scale(.75);
+    opacity: 0.6;
+    transform: translateX(420px) scale(0.75);
     z-index: 2;
 }
 
@@ -246,7 +255,7 @@
     display: inline-block;
     width: 10px;
     height: 10px;
-    background: rgba(255,255,255,.4);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
     margin: 0 6px;
 }

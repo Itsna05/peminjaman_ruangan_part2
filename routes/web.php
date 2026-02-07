@@ -9,6 +9,9 @@ use App\Http\Controllers\PeminjamanRuanganController;
 use App\Http\Controllers\ManajemenPeminjamanController;
 use App\Http\Controllers\ManajemenRuanganController;
 use App\Http\Controllers\ExportPeminjamanController;  
+use App\Http\Controllers\MonitorController;
+
+
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
@@ -199,9 +202,9 @@ Route::middleware(['CekLogin:superadmin'])
 | LANDING PAGE MONITOR
 |--------------------------------------------------------------------------
 */
-Route::get('/monitor', function () {
-    return view('monitor.landingpage');
-})->name('monitor.landingpage');
+Route::get('/monitor', [MonitorController::class, 'index'])
+    ->name('monitor.landingpage');
+
 
 /*
 |--------------------------------------------------------------------------

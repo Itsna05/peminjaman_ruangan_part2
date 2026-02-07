@@ -1,19 +1,12 @@
-document.querySelectorAll('.today-slider, .room-slider').forEach(slider => {
-    let scrollAmount = 0;
-
-    setInterval(() => {
-        scrollAmount += 1;
-        slider.scrollLeft = scrollAmount;
-
-        if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
-            scrollAmount = 0;
-        }
-    }, 30);
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.getElementById('todaySlider');
+document.addEventListener("DOMContentLoaded", () => {
+    const slider = document.getElementById("todaySlider");
     if (!slider) return;
 
-    // clone isi slider biar looping
-    slider.innerHTML += slider.innerHTML;
+    // kalau cuma 1 item, gandakan sampai penuh
+    const original = slider.innerHTML;
+
+    // ulangi sampai lebar cukup
+    while (slider.scrollWidth < slider.clientWidth * 2) {
+        slider.innerHTML += original;
+    }
 });
