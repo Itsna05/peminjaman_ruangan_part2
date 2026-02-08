@@ -1941,6 +1941,11 @@ body {
     display: flex;
 }
 
+.ruangan-track::after {
+    content: "";
+    flex: 0 0 calc(50vw - 210px);
+}
+
 .ruangan-track {
     display: flex;
     gap: 30px;

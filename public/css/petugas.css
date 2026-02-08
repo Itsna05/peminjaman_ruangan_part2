@@ -297,6 +297,10 @@ body {
 /* =======================
    DETAIL RUANGAN FINAL
    ======================= */
+.ruangan-track::after {
+    content: "";
+    flex: 0 0 calc(50vw - 210px);
+}
 
 .detail-ruangan-section {
     margin-top: 80px;

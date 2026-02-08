@@ -37,11 +37,13 @@
 <section class="detail-ruangan-section">
     <div class="container">
         <h3 class="text-center fw-bold mb-5">Detail Ruangan</h3>
-        <div class="ruangan-slider">
+
+        {{-- SLIDER --}}
+        <div class="ruangan-slider" id="ruanganSlider">
             <div class="ruangan-track">
 
                 @foreach ($ruangan as $r)
-                <div class="detail-card">
+                <div class="detail-card" id="detailCard-{{ $r->id_ruangan }}">
 
                     <div class="detail-card-header">DETAIL RUANGAN</div>
 
@@ -50,9 +52,9 @@
                         @if ($r->gambar->count())
 
                             <div id="foto-ruangan-{{ $r->id_ruangan }}"
-                                class="carousel slide foto-carousel"
-                                data-bs-touch="false"
-                                data-bs-interval="false">
+                                 class="carousel slide foto-carousel"
+                                 data-bs-touch="false"
+                                 data-bs-interval="false">
 
                                 <div class="carousel-inner">
                                     @foreach ($r->gambar as $index => $g)
@@ -80,9 +82,6 @@
                             <img src="{{ asset('img/default_ruangan.png') }}" class="img-fluid">
                         @endif
                     </div>
-
-
-
 
                     {{-- BODY --}}
                     <div class="detail-card-body">
@@ -119,6 +118,7 @@
 
                 </div>
                 @endforeach
+
             </div>
         </div>
     </div>

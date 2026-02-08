@@ -33,7 +33,7 @@
     <script src="{{ asset('js/peminjaman-waktu.js') }}"></script>
     <script src="{{ asset('js/peminjaman-form-tambah.js') }}"></script>
     <script src="{{ asset('js/edit_peminjaman.js') }}"></script>
-
+    <script src="{{ asset('js/ruangan-slider.js') }}"></script>
 
 
 </head>

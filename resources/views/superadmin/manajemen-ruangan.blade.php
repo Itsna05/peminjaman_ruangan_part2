@@ -44,17 +44,21 @@
 {{-- DETAIL RUANGAN --}}
 <section class="detail-ruangan-section">
     <div class="container">
+
+        {{-- CARD PEMBUNGKUS --}}
         <div class="status-card">
+
+            {{-- JUDUL --}}
             <h3 class="text-center fw-bold mb-5">Detail Ruangan</h3>
 
-              {{-- SEARCH & TAMBAH RUANGAN --}}
-              <div class="status-toolbar">
-                  <div class="search-box">
-                      <button type="button" class="search-btn">
-                          <i class="bi bi-search"></i>
-                      </button>
-                      <input type="text" placeholder="Pencarian" id="searchInput">
-                  </div>
+            {{-- SEARCH & TAMBAH --}}
+            <div class="status-toolbar mb-4">
+                <div class="search-box">
+                    <button type="button" class="search-btn">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <input type="text" placeholder="Pencarian" id="searchInput">
+                </div>
 
                 <div class="tambah-box">
                     <button class="tambah-btn" type="button" id="tambahToggle">
@@ -62,90 +66,96 @@
                         <span class="icon-plus">+</span>
                     </button>
                 </div>
-
-
-        </div>
-
-        <div class="ruangan-slider">
-    <div class="ruangan-track">
-
-        @foreach($ruangans as $ruangan)
-        @php
-            $elektronik = $ruangan->sarana
-                ->where('jenis_sarana','elektronik')
-                ->map(fn($s) => [
-                    'nama' => $s->nama_sarana,
-                    'jumlah' => $s->jumlah
-                ])->values();
-
-            $nonelektronik = $ruangan->sarana
-                ->where('jenis_sarana','non-elektronik')
-                ->map(fn($s) => [
-                    'nama' => $s->nama_sarana,
-                    'jumlah' => $s->jumlah
-                ])->values();
-
-            $images = $ruangan->gambar
-            ->map(fn($g) => asset('img/ruangan/'.$g->nama_file))
-            ->values();
-
-            $carouselId = 'foto-ruangan-'.$ruangan->id_ruangan;
-        @endphp
-
-        <div class="detail-card search-item"
-            data-id="{{ $ruangan->id_ruangan }}"
-            data-nama="{{ $ruangan->nama_ruangan }}"
-            data-elektronik='@json($elektronik)'
-            data-nonelektronik='@json($nonelektronik)'
-            data-images='@json($images)'>
-
-
-            <div class="detail-card-header">
-                {{ $ruangan->nama_ruangan }}
             </div>
 
-            <div class="detail-card-image photo-frame">
-                <div id="{{ $carouselId }}"
-                     class="carousel slide foto-carousel"
-                     data-bs-touch="false"
-                     data-bs-interval="false">
+            {{-- SLIDER --}}
+            <div class="ruangan-slider" id="ruanganSlider">
+                <div class="ruangan-track">
 
-                     <div class="carousel-inner">
-                        @if($images->count())
-                            @foreach($images as $i => $img)
-                                <div class="carousel-item {{ $i==0 ? 'active' : '' }}">
-                                    <img src="{{ $img }}">
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="empty-photo">
-                                <i class="bi bi-image"></i>
-                                <p>Belum ada foto</p>
+                    @foreach($ruangans as $ruangan)
+                        @php
+                            $elektronik = $ruangan->sarana
+                                ->where('jenis_sarana','elektronik')
+                                ->map(fn($s) => [
+                                    'nama' => $s->nama_sarana,
+                                    'jumlah' => $s->jumlah
+                                ])->values();
+
+                            $nonelektronik = $ruangan->sarana
+                                ->where('jenis_sarana','non-elektronik')
+                                ->map(fn($s) => [
+                                    'nama' => $s->nama_sarana,
+                                    'jumlah' => $s->jumlah
+                                ])->values();
+
+                            $images = $ruangan->gambar
+                                ->map(fn($g) => asset('img/ruangan/'.$g->nama_file))
+                                ->values();
+
+                            $carouselId = 'foto-ruangan-'.$ruangan->id_ruangan;
+                        @endphp
+
+                        {{-- CARD --}}
+                        <div class="detail-card search-item"
+                             data-id="{{ $ruangan->id_ruangan }}"
+                             data-nama="{{ $ruangan->nama_ruangan }}"
+                             data-elektronik='@json($elektronik)'
+                             data-nonelektronik='@json($nonelektronik)'
+                             data-images='@json($images)'>
+
+                            {{-- HEADER --}}
+                            <div class="detail-card-header">
+                                {{ $ruangan->nama_ruangan }}
                             </div>
-                        @endif
-                    </div>
-                    <button class="carousel-control-prev"
-                            type="button"
-                            data-bs-target="#{{ $carouselId }}"
-                            data-bs-slide="prev"></button>
 
-                    <button class="carousel-control-next"
-                            type="button"
-                            data-bs-target="#{{ $carouselId }}"
-                            data-bs-slide="next"></button>
+                            {{-- IMAGE --}}
+                            <div class="detail-card-image photo-frame">
+                                <div id="{{ $carouselId }}"
+                                     class="carousel slide foto-carousel"
+                                     data-bs-touch="false"
+                                     data-bs-interval="false">
+
+                                    <div class="carousel-inner">
+                                        @if($images->count())
+                                            @foreach($images as $i => $img)
+                                                <div class="carousel-item {{ $i==0 ? 'active' : '' }}">
+                                                    <img src="{{ $img }}">
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="empty-photo">
+                                                <i class="bi bi-image"></i>
+                                                <p>Belum ada foto</p>
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    <button class="carousel-control-prev"
+                                            type="button"
+                                            data-bs-target="#{{ $carouselId }}"
+                                            data-bs-slide="prev"></button>
+
+                                    <button class="carousel-control-next"
+                                            type="button"
+                                            data-bs-target="#{{ $carouselId }}"
+                                            data-bs-slide="next"></button>
+                                </div>
+
+                                <button class="btn-lihat-detail">
+                                    Lihat Detail
+                                </button>
+                            </div>
+
+                        </div>
+                    @endforeach
+
                 </div>
-
-                <button class="btn-lihat-detail">
-                    Lihat Detail
-                </button>
             </div>
-        </div>
-        @endforeach
 
-    </div>
-</div>
+        </div>
     </div>
 </section>
+
 
 <!-- ================= POPUP TAMBAH RUANGAN ================= -->
 <div class="popup-overlay" id="popupTambahRuangan">
