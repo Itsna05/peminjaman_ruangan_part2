@@ -62,12 +62,11 @@ class ExportPeminjamanController extends Controller
             ->get();
 
         $pdf = Pdf::loadView('superadmin.export.pdf', [
-            'transaksi' => $transaksi,
-            'filter'    => [
-                'status' => $request->status,
-                'bulan'  => $request->bulan,
-                'tahun'  => $request->tahun,
-            ]
+        'transaksi' => $transaksi,
+        'status'    => $request->status,
+        'bulan'     => $request->bulan,
+        'tahun'     => $request->tahun,
+
         ])->setPaper('A4', 'portrait');
 
         return $pdf->download('peminjaman_ruangan.pdf');

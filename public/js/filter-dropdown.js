@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const dropdownMenus = document.querySelectorAll("[data-dropdown-menu]");
 
+    const filterMode = document.getElementById("filterMode");
+
     function closeAllDropdowns() {
         dropdownMenus.forEach((menu) => menu.classList.remove("is-open"));
     }
@@ -47,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedStatus = "";
     let selectedMonth = "";
     let selectedYear = "";
+    let isYearOnly = false;
 
     window.currentPage = 1;
 
@@ -67,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             applyFilter();
 
             closeAllDropdowns();
+            updateDownloadLinks();
         });
     });
 
@@ -80,34 +84,75 @@ document.addEventListener("DOMContentLoaded", function () {
     let picker = null;
 
     // Init Flatpickr
-    if (timeInput) {
-        picker = flatpickr("#timeFilter", {
-            plugins: [
-                new monthSelectPlugin({
-                    shorthand: true,
-                    dateFormat: "Y-m",
-                    altFormat: "F Y",
-                    altInput: true,
-                }),
-            ],
+    picker = flatpickr(timeInput, {
+        plugins: [
+            new monthSelectPlugin({
+                shorthand: true,
+                dateFormat: "Y-m",
+                altFormat: "F Y",
+                altInput: true,
+            }),
+        ],
 
-            onChange: function (selectedDates, dateStr) {
-                if (dateStr) {
-                    const parts = dateStr.split("-");
+        clickOpens: true,
 
-                    selectedYear = parts[0];
-                    selectedMonth = parts[1];
+        // SAAT PILIH BULAN
+        onChange: function (selectedDates, dateStr) {
+            if (!dateStr) return;
 
-                    applyFilter();
-                }
-            },
-        });
+            const parts = dateStr.split("-");
+
+            selectedYear = parts[0];
+            selectedMonth = parts[1];
+
+            isYearOnly = false; // 🔥 artinya mode bulan
+
+            applyFilter();
+            updateDownloadLinks();
+        },
+
+        // SAAT GANTI TAHUN (TANPA PILIH BULAN)
+        onYearChange: function (selectedDates, dateStr, instance) {
+            selectedYear = instance.currentYear.toString();
+            selectedMonth = "";
+
+            isYearOnly = true;
+
+            // 🔥 SET VALUE INPUT MANUAL
+            timeInput.value = selectedYear;
+
+            applyFilter();
+            updateDownloadLinks();
+        },
+    });
+
+    // === SET NILAI DARI URL SAAT PAGE LOAD ===
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const urlYear = urlParams.get("tahun");
+    const urlMonth = urlParams.get("bulan");
+
+    if (urlYear && urlMonth) {
+        // mode bulan + tahun
+        const dateStr = urlYear + "-" + urlMonth + "-01";
+
+        picker.setDate(dateStr, true);
+
+        selectedYear = urlYear;
+        selectedMonth = urlMonth;
+    } else if (urlYear) {
+        // mode tahun saja
+        picker.setDate(urlYear + "-01-01", true);
+
+        selectedYear = urlYear;
+        selectedMonth = "";
     }
 
     // Reset
     timeClear?.addEventListener("click", function () {
         selectedMonth = "";
         selectedYear = "";
+        isYearOnly = false;
 
         if (picker) {
             picker.clear();
@@ -115,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         applyFilter();
         closeAllDropdowns();
+        updateDownloadLinks();
     });
 
     /* ======================
@@ -134,9 +180,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const matchStatus = !selectedStatus || status === selectedStatus;
 
-            const matchTime =
-                (!selectedMonth || month === selectedMonth) &&
-                (!selectedYear || year === selectedYear);
+            let matchTime = true;
+
+            // Mode: filter per tahun
+            if (isYearOnly && selectedYear) {
+                matchTime = year === selectedYear;
+            }
+
+            // Mode: filter per bulan
+            if (!isYearOnly && selectedYear && selectedMonth) {
+                matchTime = year === selectedYear && month === selectedMonth;
+            }
 
             row.classList.toggle("filtered-out", !(matchStatus && matchTime));
         });
@@ -147,6 +201,22 @@ document.addEventListener("DOMContentLoaded", function () {
         if (window.paginate) {
             window.paginate();
         }
+
+        updateBrowserUrl();
+    }
+
+    function updateBrowserUrl() {
+        const params = new URLSearchParams();
+
+        if (selectedStatus) params.set("status", selectedStatus);
+        if (selectedMonth) params.set("bulan", selectedMonth);
+        if (selectedYear) params.set("tahun", selectedYear);
+
+        const newUrl =
+            window.location.pathname +
+            (params.toString() ? "?" + params.toString() : "");
+
+        window.history.replaceState({}, "", newUrl);
     }
 
     /* ======================
@@ -174,4 +244,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    function updateDownloadLinks() {
+        const pdfBtn = document.getElementById("downloadPdf");
+        const excelBtn = document.getElementById("downloadExcel");
+
+        if (!pdfBtn || !excelBtn) return;
+
+        // AMBIL LANGSUNG DARI URL BROWSER
+        const params = new URLSearchParams(window.location.search);
+
+        const query = params.toString();
+
+        pdfBtn.href = window.exportPdfUrl + (query ? "?" + query : "");
+
+        excelBtn.href = window.exportExcelUrl + (query ? "?" + query : "");
+    }
+    updateDownloadLinks();
 });

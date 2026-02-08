@@ -120,13 +120,16 @@
                         </div>
 
                         <div class="unduh-dropdown">
-                            <a href="{{ route('superadmin.peminjaman.export.pdf', request()->query()) }}"
-                            class="unduh-item">
+                            <a href="{{ route('superadmin.peminjaman.export.pdf') }}"
+   id="downloadPdf"
+   class="unduh-item">
                                 PDF
                             </a>
 
-                            <a href="{{ route('superadmin.peminjaman.export.excel', request()->query()) }}"
-                            class="unduh-item">
+                            <a href="{{ route('superadmin.peminjaman.export.excel') }}"
+   id="downloadExcel"
+   class="unduh-item">
+
                                 Excel
                             </a>
                         </div>
@@ -302,3 +305,8 @@
 
 
 @endsection
+
+<script>
+    window.exportPdfUrl = "{{ route('superadmin.peminjaman.export.pdf') }}";
+    window.exportExcelUrl = "{{ route('superadmin.peminjaman.export.excel') }}";
+</script>
