@@ -83,48 +83,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let picker = null;
 
-    // Init Flatpickr
-    picker = flatpickr(timeInput, {
-        plugins: [
-            new monthSelectPlugin({
-                shorthand: true,
-                dateFormat: "Y-m",
-                altFormat: "F Y",
-                altInput: true,
-            }),
-        ],
+    if (timeInput) {
+        picker = flatpickr(timeInput, {
+            plugins: [
+                new monthSelectPlugin({
+                    shorthand: true,
+                    dateFormat: "Y-m",
+                    altFormat: "F Y",
+                    altInput: true,
+                }),
+            ],
 
-        clickOpens: true,
+            clickOpens: true,
 
-        // SAAT PILIH BULAN
-        onChange: function (selectedDates, dateStr) {
-            if (!dateStr) return;
+            onChange: function (selectedDates, dateStr) {
+                if (!dateStr) return;
 
-            const parts = dateStr.split("-");
+                const parts = dateStr.split("-");
+                selectedYear = parts[0];
+                selectedMonth = parts[1];
+                isYearOnly = false;
 
-            selectedYear = parts[0];
-            selectedMonth = parts[1];
+                applyFilter();
+                updateDownloadLinks();
+            },
 
-            isYearOnly = false; // 🔥 artinya mode bulan
+            onYearChange: function (selectedDates, dateStr, instance) {
+                selectedYear = instance.currentYear.toString();
+                selectedMonth = "";
+                isYearOnly = true;
 
-            applyFilter();
-            updateDownloadLinks();
-        },
+                timeInput.value = selectedYear;
 
-        // SAAT GANTI TAHUN (TANPA PILIH BULAN)
-        onYearChange: function (selectedDates, dateStr, instance) {
-            selectedYear = instance.currentYear.toString();
-            selectedMonth = "";
+                applyFilter();
+                updateDownloadLinks();
+            },
+        });
+    }
 
-            isYearOnly = true;
-
-            // 🔥 SET VALUE INPUT MANUAL
-            timeInput.value = selectedYear;
-
-            applyFilter();
-            updateDownloadLinks();
-        },
-    });
 
     // === SET NILAI DARI URL SAAT PAGE LOAD ===
     const urlParams = new URLSearchParams(window.location.search);

@@ -51,6 +51,8 @@ public function detail($id)
         'ruangan'        => $t->ruangan->nama_ruangan ?? '-',
         'no_wa'          => $t->no_wa ?? '-',
         'catatan'        => $t->catatan ?: '-',
+        'status_peminjaman' => $t->status_peminjaman,
+
     ]);
 }
 

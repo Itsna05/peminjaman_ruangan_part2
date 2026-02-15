@@ -56,6 +56,10 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch(`/superadmin/peminjaman/${currentPeminjamanId}`)
                 .then(res => res.json())
                 .then(data => {
+
+                    // 🔍 DEBUG FULL DATA
+                    console.log("ISI DATA FULL:", data);
+
                     modalContent.innerHTML = `
                         <div class="modal-row">
                             <label>Nama Acara</label><span>:</span>
@@ -102,31 +106,120 @@ document.addEventListener("DOMContentLoaded", function () {
                             <textarea readonly>${data.catatan ?? '-'}</textarea>
                         </div>
                     `;
+
+                    const footer = document.getElementById("modalFooterAction");
+                    if (!footer) return;
+
+                    // 🔍 DEBUG STATUS
+                    const rawStatus = data.status_peminjaman || data.status || "";
+                    const status = rawStatus.toLowerCase();
+
+                    console.log("STATUS TERBACA:", status);
+
+                    if (status.includes("menunggu")) {
+
+                        footer.innerHTML = `
+                            <button class="btn-approve">Setujui</button>
+                            <button class="btn-reject">Tolak</button>
+                        `;
+
+                        footer.querySelector(".btn-approve")
+                            .addEventListener("click", () => openConfirm("approve"));
+
+                        footer.querySelector(".btn-reject")
+                            .addEventListener("click", () => openConfirm("reject"));
+
+                    } else if (status.includes("disetujui")) {
+
+                        footer.innerHTML = `
+                            <div class="upload-section">
+                                <label style="display:block;margin-bottom:6px;font-weight:600;">
+                                    Upload Foto Setelah Kegiatan
+                                </label>
+
+                                <input type="file" 
+                                    id="fotoKegiatan" 
+                                    accept="image/*"
+                                    class="form-control"
+                                    style="margin-bottom:12px;">
+
+                                <button class="btn-simpan-foto">
+                                    Simpan Foto
+                                </button>
+                            </div>
+                        `;
+
+                        const inputFile = document.getElementById("fotoKegiatan");
+                        const btnSimpanFoto = footer.querySelector(".btn-simpan-foto");
+
+                        btnSimpanFoto.addEventListener("click", function () {
+
+                            if (!inputFile.files.length) {
+                                alert("Silakan pilih foto terlebih dahulu.");
+                                return;
+                            }
+
+                            const formData = new FormData();
+                            formData.append("foto", inputFile.files[0]);
+
+                            fetch(`/superadmin/peminjaman/${currentPeminjamanId}/upload-foto`, {
+                                method: "POST",
+                                headers: {
+                                    "X-CSRF-TOKEN": document
+                                        .querySelector('meta[name="csrf-token"]')
+                                        ?.getAttribute("content")
+                                },
+                                body: formData
+                            })
+                            .then(res => res.json())
+                            .then(res => {
+                                if (res.status) {
+                                    alert("Foto berhasil disimpan ✅");
+                                    location.reload();
+                                } else {
+                                    alert("Gagal upload foto");
+                                }
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                alert("Terjadi kesalahan server");
+                            });
+                        });
+                    } else {
+
+                        footer.innerHTML = `
+                            <button class="btn-disabled" disabled>
+                                Tidak ada aksi
+                            </button>
+                        `;
+                    }
+
                 })
+
+
                 .catch(() => {
                     modalContent.innerHTML = "Gagal memuat data.";
                 });
         });
     });
 
-    // =====================================================
-    // APPROVE / REJECT
-    // =====================================================
-    const btnApprove = document.querySelector(".btn-approve");
-    const btnReject = document.querySelector(".btn-reject");
 
-    if (btnApprove) {
-        btnApprove.addEventListener("click", function () {
+    // =====================
+    // EVENT DELEGATION UNTUK APPROVE / REJECT
+    // =====================
+    document.addEventListener("click", function (e) {
+
+        if (e.target.closest(".btn-approve")) {
             openConfirm("approve");
-        });
-    }
+        }
 
-    if (btnReject) {
-        btnReject.addEventListener("click", function () {
+        if (e.target.closest(".btn-reject")) {
             openConfirm("reject");
-        });
-    }
+        }
 
+    });
+
+    
     // =====================================================
     // MODAL KONFIRMASI
     // =====================================================

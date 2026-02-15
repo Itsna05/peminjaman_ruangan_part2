@@ -227,9 +227,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // TOMBOL SIMPAN
-    document
-        .getElementById("btnSimpanFasilitas")
-        .addEventListener("click", function () {
+    const btnSimpanFasilitas = document.getElementById("btnSimpanFasilitas");
+
+    if (btnSimpanFasilitas) {
+        btnSimpanFasilitas.addEventListener("click", function () {
             const nama = document.getElementById("tambahNama").value.trim();
             const jumlah = document.getElementById("tambahJumlah").value.trim();
             if (!nama || !jumlah) return;
@@ -238,21 +239,21 @@ document.addEventListener("DOMContentLoaded", function () {
             const no = tbody.children.length + 1;
 
             tbody.insertAdjacentHTML("beforeend", `
-            <tr>
-                <td>${no}</td>
-                <td><input class="form-control" value="${nama}"></td>
-                <td><input type="number" class="form-control" value="${jumlah}"></td>
-                <td>
-                <button class="btn-hapus-item" title="Hapus">
-                    <i class="bi bi-trash"></i>
-                </button>
-                </td>
-            </tr>
+                <tr>
+                    <td>${no}</td>
+                    <td><input class="form-control" value="${nama}"></td>
+                    <td><input type="number" class="form-control" value="${jumlah}"></td>
+                    <td>
+                    <button class="btn-hapus-item" title="Hapus">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    </td>
+                </tr>
             `);
 
-            document.getElementById("popupTambahFasilitas").style.display =
-                "none";
+            document.getElementById("popupTambahFasilitas").style.display = "none";
         });
+    }
 
     // ================= UPLOAD FOTO MODE EDIT =================
     const btnTambahFotoEdit = document.querySelector(
@@ -468,15 +469,20 @@ document.addEventListener("DOMContentLoaded", function () {
         previewFotoBaru.style.objectPosition = `${fotoBaru[fotoBaruIndex].posX}% ${fotoBaru[fotoBaruIndex].posY}%`;
     }
 
-    document
-        .getElementById("tambahElektronikBaru")
-        .addEventListener("click", () => {
+    const tambahElektronikBaru = document.getElementById("tambahElektronikBaru");
+    if (tambahElektronikBaru) {
+        tambahElektronikBaru.addEventListener("click", () => {
             tambahBaris("elektronikBaru");
         });
+    }
 
-    document.getElementById("tambahNonBaru").addEventListener("click", () => {
-        tambahBaris("nonBaru");
-    });
+    const tambahNonBaru = document.getElementById("tambahNonBaru");
+    if (tambahNonBaru) {
+        tambahNonBaru.addEventListener("click", () => {
+            tambahBaris("nonBaru");
+        });
+    }
+
 
     function tambahBaris(id) {
         const tbody = document.getElementById(id);

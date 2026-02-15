@@ -135,7 +135,7 @@
                                     </td>
 
                                     <td class="text-center">
-                                        @if ($t->status_peminjaman === 'Menunggu')
+                                        @if (in_array($t->status_peminjaman, ['Menunggu', 'Disetujui']))
                                             <button class="btn-edit btn-open-modal"
                                                     data-id="{{ $t->id_peminjaman }}">
                                                 <i class="bi bi-pencil"></i>
@@ -146,6 +146,7 @@
                                             </button>
                                         @endif
                                     </td>
+
 
                                 </tr>
                                 @empty
@@ -213,10 +214,9 @@
         </div>
 
         <!-- FOOTER -->
-        <div class="modal-footer">
-            <button class="btn-approve">Setujui</button>
-            <button class="btn-reject">Tolak</button>
-        </div>
+        <div class="modal-footer" id="modalFooterAction">
+    </div>
+
 
     </div>
 </div>

@@ -1083,6 +1083,26 @@ body {
     table-layout: fixed;
 }
 
+.upload-section {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.btn-simpan-foto {
+    background: #15468a;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-simpan-foto:hover {
+    background: #174ecb;
+}
+
+
 /* =====================================
    RAPATKAN KOLOM NO & NAMA RUANGAN
    KHUSUS HALAMAN PERSETUJUAN
@@ -1297,6 +1317,11 @@ body {
     align-items: center;
     z-index: 9999;
 }
+
+.modal-overlay.active {
+    display: flex;
+}
+
 
 .modal-card {
     width: 520px;

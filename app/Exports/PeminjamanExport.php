@@ -127,10 +127,21 @@ class PeminjamanExport implements
                 $sheet->setCellValue('A3', 'Provinsi Jawa Tengah');
 
                 $sheet->mergeCells("A5:{$lastCol}5");
+                // === PERIODE SESUAI FILTER ===
+                $periode = now()->translatedFormat('F Y');
+
+                if ($this->bulan && $this->tahun) {
+                    $periode = \Carbon\Carbon::create()
+                        ->month((int) $this->bulan)
+                        ->year((int) $this->tahun)
+                        ->translatedFormat('F Y');
+                }
+
                 $sheet->setCellValue(
                     'A5',
-                    'Periode : ' . now()->translatedFormat('F Y')
+                    'Periode : ' . $periode
                 );
+
 
                 $sheet->mergeCells("A6:{$lastCol}6");
                 $sheet->setCellValue(
