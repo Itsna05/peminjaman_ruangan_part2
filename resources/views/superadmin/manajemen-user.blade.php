@@ -252,7 +252,15 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Bidang</label>
-                    <input type="text" name="bidang" class="form-control" required>
+
+                    <select name="bidang" id="bidangSelect" class="form-select" required>
+                        <option value="">-- Pilih Bidang --</option>
+                        <option value="tambah">Tambah Bidang Baru</option>
+
+                        @foreach($bidangList as $item)
+                            <option value="{{ $item }}">{{ $item }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-3">
@@ -306,6 +314,36 @@
                 </div>
 
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalBidangBaru" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Input Bidang Baru</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="text" id="inputBidangBaru"
+                       class="form-control"
+                       placeholder="Masukkan nama bidang">
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary"
+                        data-bs-dismiss="modal">Batal</button>
+
+                <button type="button"
+                        class="btn btn-success"
+                        id="simpanBidangBaru">
+                    Simpan
+                </button>
+            </div>
+
         </div>
     </div>
 </div>

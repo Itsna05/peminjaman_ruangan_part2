@@ -163,3 +163,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const select = document.getElementById("bidangSelect");
+    const modalElement = document.getElementById("modalBidangBaru");
+
+    if (!select || !modalElement) return;
+
+    const modal = new bootstrap.Modal(modalElement);
+
+    select.addEventListener("change", function () {
+        if (this.value === "tambah") {
+            modal.show();
+        }
+    });
+
+    const simpanBtn = document.getElementById("simpanBidangBaru");
+
+    if (simpanBtn) {
+        simpanBtn.addEventListener("click", function () {
+
+            const input = document.getElementById("inputBidangBaru");
+            const value = input.value.trim();
+
+            if (value === "") return;
+
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = value;
+
+            select.appendChild(option);
+            select.value = value;
+
+            modal.hide();
+            input.value = "";
+        });
+    }
+
+});

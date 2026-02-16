@@ -80,7 +80,11 @@ class SuperAdminController extends Controller
     {
         $users = User::all();
         $bidangPegawai = DB::table('bidang_pegawai')->get();
-        return view('superadmin.manajemen-user', compact('users', 'bidangPegawai'));
+        $bidangList = DB::table('bidang_pegawai')
+                ->select('bidang')
+                ->distinct()
+                ->pluck('bidang');
+        return view('superadmin.manajemen-user', compact('users', 'bidangPegawai', 'bidangList'));
     }
 
     public function storeBidang(Request $request)
