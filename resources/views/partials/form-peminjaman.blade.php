@@ -15,57 +15,78 @@
                 <div class="row g-4">
 
                     <div class="col-md-6">
-                        <label class="form-label">Nama Acara</label required>
+                        <label class="form-label">Nama Acara <span class="text-danger">*</span></label>
                         <input type="text" name="acara" class="form-control" placeholder="Masukkan Nama Acara" required>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Jumlah Peserta</label>
+                        <label class="form-label">Jumlah Peserta <span class="text-danger">*</span></label>
                         <input type="number" name="jumlah_peserta" class="form-control" placeholder="Masukkan Jumlah Peserta" required>
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Waktu Peminjaman</label>
 
-                        <div class="waktu-wrapper">
-                            <input
-                                type="date"
-                                id="tgl_mulai"
-                                required
-                                class="form-control"
-                                onchange="gabungWaktu()">
+                    <label class="form-label">
+                        Waktu Peminjaman <span class="text-danger">*</span>
+                    </label>
 
-                            <input
-                                type="time"
-                                required
-                                id="jam_mulai"
-                                class="form-control waktu-jam"
-                                onchange="gabungWaktu()">
+                    <div class="waktu-flex">
 
-                            <span class="separator">~</span>
+                        <!-- MULAI -->
+                        <div class="waktu-blok">
+                            <small class="text-muted">Mulai</small>
 
-                            <input
-                                type="date"
-                                required
-                                id="tgl_selesai"
-                                class="form-control"
-                                onchange="gabungWaktu()" >
+                            <div class="waktu-row">
+                                <input
+                                    type="date"
+                                    id="tgl_mulai"
+                                    required
+                                    class="form-control"
+                                    onchange="gabungWaktu()">
 
-                            <input
-                                type="time"
-                                required
-                                id="jam_selesai"
-                                class="form-control waktu-jam"
-                                onchange="gabungWaktu()">
+                                <input
+                                    type="time"
+                                    id="jam_mulai"
+                                    required
+                                    class="form-control waktu-jam"
+                                    onchange="gabungWaktu()">
+                            </div>
                         </div>
+
+                        <span class="waktu-sep">~</span>
+
+                        <!-- SELESAI -->
+                        <div class="waktu-blok">
+                            <small class="text-muted">Selesai</small>
+
+                            <div class="waktu-row">
+                                <input
+                                    type="date"
+                                    id="tgl_selesai"
+                                    required
+                                    class="form-control"
+                                    onchange="gabungWaktu()">
+
+                                <input
+                                    type="time"
+                                    id="jam_selesai"
+                                    required
+                                    class="form-control waktu-jam"
+                                    onchange="gabungWaktu()">
+                            </div>
+                        </div>
+
                     </div>
+                </div>
+
+
 
                     <input type="hidden" name="waktu_mulai" id="waktu_mulai" required>
                     <input type="hidden" name="waktu_selesai" id="waktu_selesai" required>
 
 
                     <div class="col-md-6">
-                        <label class="form-label">Bidang</label>
+                        <label class="form-label">Bidang <span class="text-danger">*</span></label>
                         <select name="bidang" id="bidang" class="form-select" required>
                             <option value="" disabled selected hidden>Pilih Bidang</option disabled>
                             @foreach ($bidang as $b)
@@ -78,7 +99,7 @@
 
 
                     <div class="col-md-6">
-                        <label class="form-label">Sub Bidang</label>
+                        <label class="form-label">Sub Bidang <span class="text-danger">*</span></label>
                         <select name="sub_bidang" id="sub_bidang" class="form-select" required>
                             <option value="" disabled selected hidden>Pilih Sub Bidang</option>
                             <option value="">Pilih Sub Bidang</option disabled>
@@ -86,7 +107,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Ruangan</label >
+                        <label class="form-label">Ruangan <span class="text-danger">*</span></label >
                         <select name="id_ruangan" class="form-select" required>
                             <option value="" disabled selected hidden>Pilih Ruangan</option>
                             @foreach ($ruangan as $r)
@@ -99,7 +120,7 @@
 
 
                     <div class="col-md-6">
-                        <label class="form-label">Nomor WhatsApp</label>
+                        <label class="form-label">Nomor WhatsApp <span class="text-danger">*</span></label>
                         <input type="text" name="no_wa" class="form-control" placeholder="Masukkan Nomor WhatsApp" required>
                     </div>
 
