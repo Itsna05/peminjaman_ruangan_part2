@@ -2,7 +2,7 @@
     <div class="container-fluid">
 
         {{-- Logo --}}
-        <a class="navbar-brand d-flex align-items-center gap-2" href="/monitor">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/petugas/dashboard">
             <img src="{{ asset('img/logo_nav.png') }}" alt="Logo" height="38">
         </a>
 

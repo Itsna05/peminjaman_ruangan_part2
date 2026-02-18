@@ -14,7 +14,7 @@
 <body class="monitor-body">
 
 <header class="monitor-header">
-    <a class="header-left" href="/petugas/dashboard">
+    <a class="header-left">
         <img src="{{ asset('img/logo_nav.png') }}" class="logo">
     </a>
 
@@ -23,10 +23,27 @@
         <h4>PUSAT INFORMASI RUANGAN</h4>
     </div>
 
-    <div class="header-right">
+    <div class="header-right d-flex align-items-center gap-3">
+
+    {{-- Wrapper Jam & Tanggal --}}
+    <div class="clock-wrapper text-end">
         <h4 id="clock">00:00:00</h4>
         <small id="date">-</small>
     </div>
+
+    {{-- Icon Login --}}
+    <a href="{{ route('login') }}"
+       class="login-icon"
+       title="Login">
+        <img src="{{ asset('img/btn_login.png') }}"
+             alt="Login"
+             height="30">
+    </a>
+
+</div>
+
+
+    
 </header>
 
 <main class="monitor-content">

@@ -14,9 +14,8 @@ use App\Http\Controllers\MonitorController;
 
 use Illuminate\Support\Facades\DB;
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', [MonitorController::class, 'index'])
+    ->name('home');
 
 /*
 |--------------------------------------------------------------------------

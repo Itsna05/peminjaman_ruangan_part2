@@ -265,3 +265,12 @@
     border-radius: 10px;
     background: #fff;
 }
+
+.clock-wrapper h4 {
+    margin: 0;
+}
+
+.clock-wrapper small {
+    display: block;
+    margin-top: 2px;
+}
