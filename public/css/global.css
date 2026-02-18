@@ -317,3 +317,93 @@
     color: #555;
     line-height: 1.6;
 }
+
+/*KONTAK*/ 
+.faq-header {
+    padding: 0 8px;
+}
+
+.kelola-btn {
+    background-color: #1e4fa1;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 130px;
+}
+
+.kelola-btn:hover {
+    background-color: #ffca28;
+    box-shadow: 0 5px 5px rgba(133, 133, 133, 0.28);
+}
+
+/* Tambah */
+.btn-tambah {
+    background-color: #1e7e4f;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-tambah:hover {
+    background-color: #17633e;
+}
+
+/* Simpan */
+.btn-simpan {
+    background-color: #1e4fa1;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-simpan:hover {
+    background-color: #163b7a;
+}
+
+/* Batal */
+.btn-batal {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-batal:hover {
+    background-color: #545b62;
+}
+
+#faqEditMode {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#faqViewMode {
+    max-height: 175px;
+    overflow-y: auto;
+}
+
+.faq-scroll {
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.faq-scroll {
+    max-height: 260px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}

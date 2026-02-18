@@ -45,9 +45,9 @@
 
                 {{-- MAPS --}}
                 <div class="contact-card mb-4">
-                    <h6 class="contact-title">
+                    <h4 class="contact-title fw-bold">
                         <i class="bi bi-map"></i> Maps
-                    </h6>
+                    </h4>
 
                     <iframe
                         src="https://www.google.com/maps?q=DPU%20Bina%20Marga%20dan%20Cipta%20Karya%20Jawa%20Tengah&output=embed"
@@ -60,11 +60,21 @@
                 </div>
 
                 {{-- FAQ --}}
-                <div class="contact-card">
-                    <h6 class="contact-title">
-                        <i class="bi bi-question-lg"></i> Pertanyaan Umum (FAQ)
-                    </h6>
+                <div class="contact-card faq-card">
 
+                    <div class="faq-header d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="contact-title fw-bold">
+                            <i class="bi bi-question-lg"></i> Pertanyaan Umum (FAQ)
+                        </h4>
+
+                        @if(session('role') == 'superadmin')
+                            <button id="btnKelolaFaq" class="kelola-btn">
+                                Kelola FAQ
+                            </button>
+                        @endif
+                    </div>
+                    {{-- FAQ MODE VIEW --}}
+                    <div id="faqViewMode">
                     <details class="faq-item">
                         <summary>Bagaimana cara membatalkan pesanan ruangan?</summary>
                         <p>
@@ -88,6 +98,33 @@
                             dan permohonan peminjaman.
                         </p>
                     </details>
+                </div>
+
+                {{-- FAQ MODE EDIT--}}
+                @if(session('role') == 'superadmin')
+
+                <div id="faqEditMode" style="display: none;">
+
+                    <div class="d-flex justify-content-end mb-3 gap-2">
+                        <button id="btnTambahFaq" class="btn-tambah">+ Tambah FAQ</button>
+                        <button id="btnSimpanFaq" class="btn-simpan">Simpan</button>
+                        <button id="btnBatalFaq" class="btn-batal">Batal</button>
+                    </div>
+
+                    <div class="faq-edit-item border p-3 mb-3 rounded position-relative">
+                        <button class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+                        <label class="form-label">Pertanyaan</label>
+                        <input type="text" class="form-control mb-2">
+                        <label class="form-label">Jawaban</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+
+                </div>
+
+                @endif
 
                 </div>
             </div>
@@ -98,7 +135,7 @@
             <div class="col-lg-4">
                 <div class="contact-card">
 
-                    <h6 class="contact-title">Alamat Kantor</h6>
+                    <h4 class="contact-title fw-bold">Alamat Kantor</h6>
 
                     <div class="contact-info">
                         <i class="bi bi-map"></i>
