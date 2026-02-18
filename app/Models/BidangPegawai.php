@@ -18,6 +18,9 @@ class BidangPegawai extends Model
         'sub_bidang'
     ];
 
+    public $incrementing = true;
+    protected $keyType = 'int';
+
     
     public function transaksi()
     {

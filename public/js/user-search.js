@@ -201,3 +201,57 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const editButtons = document.querySelectorAll(".btn-edit-user");
+    const deleteForm = document.getElementById("formDeleteUser");
+    const deleteBtn = document.getElementById("btnDeleteUser");
+
+    let currentUserId = null;
+
+    editButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            currentUserId = this.getAttribute("data-id");
+
+            deleteForm.action = `/superadmin/user/${currentUserId}`;
+        });
+    });
+
+    deleteBtn.addEventListener("click", function () {
+
+        if (confirm("Yakin ingin menghapus user ini?")) {
+            deleteForm.submit();
+        }
+
+    });
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const editBidangButtons = document.querySelectorAll(".btn-edit-bidang");
+    const deleteBidangForm = document.getElementById("formDeleteBidang");
+    const deleteBidangBtn = document.getElementById("btnDeleteBidang");
+
+    let currentBidangId = null;
+
+    editBidangButtons.forEach(button => {
+        button.addEventListener("click", function () {
+
+            currentBidangId = this.getAttribute("data-id");
+
+            deleteBidangForm.action =
+                `/superadmin/bidang/${currentBidangId}`;
+        });
+    });
+
+    deleteBidangBtn.addEventListener("click", function () {
+
+        if (confirm("Yakin ingin menghapus bidang ini?")) {
+            deleteBidangForm.submit();
+        }
+
+    });
+
+});

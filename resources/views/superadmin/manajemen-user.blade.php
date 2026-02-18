@@ -309,6 +309,11 @@
                 </div>
 
                 <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            id="btnDeleteBidang">
+                        Hapus
+                    </button>
                     <button class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
                     <button class="btn btn-success">Update</button>
                 </div>
@@ -317,6 +322,12 @@
         </div>
     </div>
 </div>
+
+<form id="formDeleteBidang" method="POST" style="display:none;">
+    @csrf
+    @method('DELETE')
+</form>
+
 
 <div class="modal fade" id="modalBidangBaru" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -502,6 +513,11 @@
                 </div>
 
                 <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            id="btnDeleteUser">
+                        Hapus
+                    </button>
                     <button class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
                     <button class="btn btn-success">Update</button>
                 </div>
@@ -510,6 +526,11 @@
         </div>
     </div>
 </div>
+
+<form id="formDeleteUser" method="POST" style="display:none;">
+    @csrf
+    @method('DELETE')
+</form>
 
 
 @push('scripts')

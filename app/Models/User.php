@@ -20,5 +20,6 @@ class User extends Authenticatable
     ];
 
     public $timestamps = false;
+    protected $keyType = 'int';
 }
 

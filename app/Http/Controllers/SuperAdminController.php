@@ -9,6 +9,7 @@ use App\Models\Transaksi;
 use Illuminate\Support\Facades\DB;
 use App\Models\Ruangan;
 use Carbon\Carbon;
+use App\Models\BidangPegawai;
 
 
 class SuperAdminController extends Controller
@@ -250,6 +251,28 @@ class SuperAdminController extends Controller
 
         return redirect('/superadmin')->with('success', 'Super Admin berhasil dihapus');
     }
+
+    public function userdestroy($id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return redirect()->back()
+            ->with('success', 'User berhasil dihapus');
+    }
+
+    public function destroyBidang($id)
+    {
+        $bidang = BidangPegawai::findOrFail($id);
+
+        $bidang->delete();
+
+        return redirect()->back()
+            ->with('success', 'Bidang berhasil dihapus');
+    }
+
+
 
     public function manajemenPeminjaman()
     {

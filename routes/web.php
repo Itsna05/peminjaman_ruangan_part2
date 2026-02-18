@@ -112,6 +112,16 @@ Route::middleware(['CekLogin:superadmin'])
         Route::get('/delete/{id}', [SuperAdminController::class, 'destroy'])
             ->name('delete');
 
+        Route::delete('/user/{id}', 
+            [SuperAdminController::class, 'userdestroy']
+        )->name('superadmin.user.destroy');
+
+        Route::delete('/bidang/{id}', 
+            [SuperAdminController::class, 'destroyBidang']
+        )->name('superadmin.bidang.destroy');
+
+
+
         /*
         |------------------------------------------
         | MANAJEMEN PEMINJAMAN
