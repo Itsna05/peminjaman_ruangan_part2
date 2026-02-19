@@ -151,24 +151,39 @@
 
 {{-- GALERI --}}
 <section class="monitor-gallery">
-    <h3 class="gallery-title">RUANGAN RAPAT</h3>
+    <h3 class="gallery-title">KEGIATAN TERBARU</h3>
+
     <div class="gallery-slider" id="gallerySlider">
 
-@foreach($galeri as $g)
+        @forelse($galeri as $g)
 
-    <div class="slide {{ $loop->first ? 'active' : '' }}">
+            <div class="slide {{ $loop->first ? 'active' : '' }}">
 
+                <img
+                    src="{{ asset('storage/foto_kegiatan/'.$g->foto_kegiatan) }}"
+                    class="gallery-img"
+                    alt="{{ $g->acara }}"
+                >
 
+            </div>
 
-        <img src="{{ asset('img/ruangan/'.$g->nama_file) }}"
-             class="gallery-img"
-             alt="{{ $g->nama_ruangan }}">
+        @empty
 
+            <p class="text-center text-muted">
+                Belum ada foto kegiatan
+            </p>
+
+        @endforelse
+        </div>
+    <div class="gallery-indicator">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
     </div>
 
-@endforeach
 
-</div>
+</section>
+
 
 
     <!-- <div class="gallery-slider" id="gallerySlider">
@@ -203,14 +218,6 @@
             <img src="{{ asset('img/ruang_studio.png') }}">
         </div>
     </div> -->
-
-
-    <div class="gallery-indicator">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-    </div>
-</section>
 
 
 @endsection
