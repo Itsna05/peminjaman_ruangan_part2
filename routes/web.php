@@ -147,6 +147,18 @@ Route::middleware(['CekLogin:superadmin'])
             [ManajemenPeminjamanController::class, 'reject']
         )->name('peminjaman.reject');
 
+        Route::post(
+            '/peminjaman/{id}/upload-foto',
+            [ManajemenPeminjamanController::class, 'uploadFoto']
+        );
+
+        Route::delete(
+    '/peminjaman/{id}/hapus-foto',
+    [ManajemenPeminjamanController::class, 'hapusFoto']
+);
+
+
+
         /*
         |------------------------------------------
         | EXPORT PEMINJAMAN (PDF & EXCEL)

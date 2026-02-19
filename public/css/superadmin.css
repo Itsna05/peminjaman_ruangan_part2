@@ -150,7 +150,6 @@ body {
     min-height: 130px;
 }
 
-
 /* =========================
    RIWAYAT PEMINJAMAN
 ========================= */
@@ -1102,7 +1101,6 @@ body {
     background: #174ecb;
 }
 
-
 /* =====================================
    RAPATKAN KOLOM NO & NAMA RUANGAN
    KHUSUS HALAMAN PERSETUJUAN
@@ -1321,7 +1319,6 @@ body {
 .modal-overlay.active {
     display: flex;
 }
-
 
 .modal-card {
     width: 520px;
@@ -2590,4 +2587,160 @@ body {
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.foto-gallery {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    max-height: 200px;
+    overflow-y: auto;
+
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+.foto-gallery img {
+    width: 90px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.foto-gallery img.active {
+    border-color: #0d6efd;
+}
+
+.foto-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+/* =========================
+   FOTO BUTTON SYSTEM
+========================= */
+
+.foto-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* Base Style */
+.btn-foto {
+    min-width: 140px;
+    height: 42px;
+
+    border-radius: 10px;
+    border: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Upload */
+.btn-upload {
+    background: #15468a;
+    color: #fff;
+}
+
+.btn-upload:hover {
+    background: #1c5bbf;
+    transform: translateY(-2px);
+}
+
+/* Ganti */
+.btn-ganti {
+    background: #ffca28;
+    color: #fff;
+}
+
+.btn-ganti:hover {
+    background: #f4b400;
+    transform: translateY(-2px);
+}
+
+/* Hapus */
+.btn-hapus {
+    background: #e53935;
+    color: #fff;
+}
+
+.btn-hapus:hover {
+    background: #c62828;
+    transform: translateY(-2px);
+}
+.foto-preview-img {
+    width: 100%;
+    max-height: 260px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #f8fafc;
+    padding: 6px;
+}
+
+.upload-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #000; /* sesuaikan dengan warna tema biru kamu */
+    margin-bottom: 10px;
+    display: block;
+}
+/* Upload Card */
+
+.upload-card {
+    border: 2px dashed #3b82f6;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: #f8fbff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+.upload-card:hover {
+    background: #eef5ff;
+    border-color: #2563eb;
+}
+
+/* Drag aktif */
+.upload-card.dragover {
+    background: #e0edff;
+    border-color: #1d4ed8;
+}
+
+.upload-icon {
+    width: 60px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.upload-text {
+    font-size: 14px;
+    color: #444;
 }

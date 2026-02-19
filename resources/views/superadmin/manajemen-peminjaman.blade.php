@@ -208,13 +208,111 @@
             <button class="modal-close">&times;</button>
         </div>
 
-        <!-- BODY -->
-         <div class="modal-body" id="modalDetailContent">
-            Loading...
+        <div class="modal-body">
+
+            <div class="modal-row">
+                <label>Nama Acara</label><span>:</span>
+                <input type="text" id="mAcara" readonly>
+            </div>
+
+            <div class="modal-row">
+                <label>Jumlah Peserta</label><span>:</span>
+                <input type="text" id="mPeserta" readonly>
+            </div>
+
+            <div class="modal-row">
+                <label>Tanggal</label><span>:</span>
+                <input type="text" id="mTanggal" readonly>
+            </div>
+
+            <div class="modal-row">
+                <label>Waktu</label><span>:</span>
+                <input type="text" id="mWaktu" readonly>
+            </div>
+
+            <div class="modal-row">
+                <label>Bidang</label><span>:</span>
+                <input type="text" id="mBidang" readonly>
+            </div>
+
+            <div class="modal-row">
+                <label>Sub Bidang</label><span>:</span>
+                <input type="text" id="mSubBidang" readonly>
+            </div>
+
+            <div class="modal-row">
+                <label>Ruangan</label><span>:</span>
+                <input type="text" id="mRuangan" readonly>
+            </div>
+
+            <div class="modal-row">
+                <label>No WhatsApp</label><span>:</span>
+                <input type="text" id="mWa" readonly>
+            </div>
+
+            <div class="modal-row textarea">
+                <label>Catatan</label><span>:</span>
+                <textarea id="mCatatan" readonly></textarea>
+            </div>
+
+            <div id="actionUpload" class="hidden mt-3">
+            <p class="upload-label">Upload Foto Setelah Kegiatan</p>
+            <!-- Upload Card -->
+            <div id="uploadArea" class="upload-card hidden">
+
+                <img src="/img/upload.png" class="upload-icon">
+
+                <p class="upload-text">
+                    Klik atau drag foto ke sini
+                </p>
+
+            </div>
+
+            <!-- Preview -->
+            <div id="fotoPreviewBox" class="mb-2"></div>
+
+            <!-- Controls -->
+            <div class="foto-actions">
+
+                <input type="file" id="fotoKegiatan" accept="image/*" hidden>
+
+                <button id="btnUploadFoto" class="btn-foto btn-upload hidden">
+                    Upload Foto
+                </button>
+
+                <button id="btnGantiFoto" class="btn-foto btn-ganti hidden">
+                    Ganti Foto
+                </button>
+
+                <button id="btnHapusFoto" class="btn-foto btn-hapus hidden">
+                    Hapus Foto
+                </button>
+
+
+            </div>
         </div>
 
-        <!-- FOOTER -->
-        <div class="modal-footer" id="modalFooterAction">
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            {{-- Approve / Reject --}}
+            <div id="actionApprove" class="hidden">
+                <button class="btn-approve">Setujui</button>
+                <button class="btn-reject">Tolak</button>
+            </div>
+
+            {{-- Disabled --}}
+            <div id="actionDisabled" class="hidden">
+                <button disabled class="btn-disabled">
+                    Tidak ada aksi
+                </button>
+            </div>
+
+        </div>
+
     </div>
 
 
