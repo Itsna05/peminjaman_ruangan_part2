@@ -10,6 +10,7 @@ use App\Http\Controllers\ManajemenPeminjamanController;
 use App\Http\Controllers\ManajemenRuanganController;
 use App\Http\Controllers\ExportPeminjamanController;  
 use App\Http\Controllers\MonitorController;
+use App\Http\Controllers\FaqController;
 
 
 use Illuminate\Support\Facades\DB;
@@ -237,6 +238,13 @@ Route::middleware(['CekLogin:petugas,superadmin'])
         return view('shared.kontak');
     })
     ->name('shared.kontak');
+
+Route::get('/kontak', [FaqController::class,'index'])
+->name('shared.kontak');
+
+Route::post('/faq', [FaqController::class,'store']);
+Route::put('/faq/{id}', [FaqController::class,'update']);
+Route::delete('/faq/{id}', [FaqController::class,'destroy']);
 
     /*
 |--------------------------------------------------------------------------
