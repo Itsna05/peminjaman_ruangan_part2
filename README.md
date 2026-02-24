@@ -100,10 +100,5 @@ php artisan serve
 - Data awal menggunakan seeder (DemoSeeder)
 - Database tidak perlu import manual
 
----
 
-## 📌 Catatan
 
-Project ini dibuat untuk keperluan tugas perkuliahan.
-
-Data yang digunakan adalah data contoh (dummy) untuk demo sistem.
