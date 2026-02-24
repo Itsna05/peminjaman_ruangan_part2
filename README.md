@@ -99,6 +99,3 @@ php artisan serve
 - Struktur database dibuat menggunakan migration
 - Data awal menggunakan seeder (DemoSeeder)
 - Database tidak perlu import manual
-
-
-
